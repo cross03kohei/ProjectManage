@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>プロジェクトの登録</title>
+</head>
+<body>
+    <h3>プロジェクト情報登録</h3>
+    <div class="project_form">
+        <form>
+            <div class="client_name">
+                <label>顧客名</label>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>商品名</label>
+                <select>
+                    <option value="0">名刺</option>
+                    <option value="1">封筒</option>
+                </select>
+            </div>
+            <div class="quantity">
+                <label>数量</label>
+                <input type="text">
+            </div>
+            <div class="manager">
+                <label>担当者</label>
+                <select name="manager">
+                    <option value="0">-----</option>
+                    <option value="1">久保田恵明</option>
+                    <option value="2">久保田満穂</option>
+                </select>
+            </div>
+            <div class="reception_date">
+                <label>受付日</label>
+                <input type="date">
+            </div>
+            <div class="progress">
+                <label>状況</label>
+                <select name="progress">
+                    <option value="0">未着手</option>
+                    <option value="1">進行中</option>
+                    <option value="2">完了</option>
+                </select>
+            </div>
+            <div class="amount">
+                <label>金額</label>
+                <input type="text">
+            </div>
+            <div class="delivery_date">
+                <label>納品日</label>
+                <input type="date">
+            </div>
+            <div class="submit">
+                <input type="submit" value="登録">
+            </div>
+        </form>
+    </div>
+    <div class="client_search">
+        <h3>顧客名検索</h3>
+        <form>
+            <input type="text">
+            <input type="submit" value="検索">
+        </form>
+<!--        リストで表示-->
+    </div>
+
+</body>
+</html>

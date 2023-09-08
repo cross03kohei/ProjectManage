@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>売上管理</title>
+</head>
+<body>
+    <h3>売上管理</h3>
+    <div class="search">
+        <form>
+            <label>日付</label>
+            <input type="month">
+            <label>商品</label>
+            <select name="itme" >
+                <option value="0">すべて</option>
+                <option value="1">名刺</option>
+                <option value="2">封筒</option>
+            </select>
+            <input type="submit" value="選択">
+        </form>
+    </div>
+    <div class="proceeds_table">
+        <table>
+            <thead>
+                <tr>
+                    <td>納品日</td>
+                    <td>顧客名</td>
+                    <td>商品</td>
+                    <td>金額</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-08-24</td>
+                    <td>久保田耕平</td>
+                    <td>チラシ</td>
+                    <td>2000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h5>合計</h5><p>1000円</p>
+    <div class="button_csv">
+        <button type="submit">CSVに出力</button>
+    </div>
+</body>
+</html>
