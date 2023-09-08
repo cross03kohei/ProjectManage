@@ -5,6 +5,86 @@
     <title>プロジェクト管理</title>
 </head>
 <body>
+    <h2>プロジェクト管理</h2>
+<!--    ヘッダーの呼び出し-->
+    <div th:replace="header :: header"></div>
+
+    <div class="not_project_table">
+        <h3>未着手のプロジェクト</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>登録日時</th>
+                <th>顧客名</th>
+                <th>商品名</th>
+                <th>担当スタッフ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>2022-10-31</td>
+            <td>kubota</td>
+            <td>チラシ</td>
+            <td>久保田義明</td>
+            <td>
+                <button>編集</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="now_project_table">
+        <h3>進行中のプロジェクト</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>登録日時</th>
+                <th>顧客名</th>
+                <th>商品名</th>
+                <th>担当スタッフ</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2022-10-31</td>
+                <td>kubota</td>
+                <td>チラシ</td>
+                <td>久保田義明</td>
+                <td>
+                    <button>編集</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="end_project_table">
+        <h3>完了したプロジェクト</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>登録日時</th>
+                <th>顧客名</th>
+                <th>商品名</th>
+                <th>担当スタッフ</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2022-10-31</td>
+                <td>kubota</td>
+                <td>チラシ</td>
+                <td>久保田義明</td>
+                <td>
+                    <button>編集</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </body>
+
 </html>
