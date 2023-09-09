@@ -41,5 +41,5 @@ public class Client {
      * cascade 元が消えたらどうするか
      */
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Project> projectList;
+    private List<Project> projects;
 }
