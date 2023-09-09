@@ -1,5 +1,6 @@
 package com.cross.jp.projectmanage.controller;
 
+import com.cross.jp.projectmanage.CategoryMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ public class ProjectController {
     }
     @GetMapping("/add")
     public String addProject(Model model){
+        model.addAttribute("item",CategoryMap.items);
         return "project_add";
     }
 }

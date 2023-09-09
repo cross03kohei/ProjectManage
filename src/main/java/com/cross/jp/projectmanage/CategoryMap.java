@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 //カテゴリーをMapで管理
 public class CategoryMap {
-    private static Map<Integer,String> items = new HashMap<>(); //商品
+    public static Map<Integer,String> items = new HashMap<>(); //商品
     private static Map<Integer,String> manager = new HashMap<>();   //担当者
     private static Map<Integer,String> prohress = new HashMap<>();  //進歩状況
     static {

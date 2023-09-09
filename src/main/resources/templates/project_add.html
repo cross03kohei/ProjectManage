@@ -15,8 +15,7 @@
             <div class="item">
                 <label>商品名</label>
                 <select>
-                    <option value="0">名刺</option>
-                    <option value="1">封筒</option>
+                    <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 0}"></option>
                 </select>
             </div>
             <div class="quantity">
