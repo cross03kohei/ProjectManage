@@ -1,0 +1,45 @@
+package com.cross.jp.projectmanage.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+/**
+ * 顧客テーブルの情報
+ */
+@Entity
+@Table(name = "client")
+@Getter
+@Setter
+public class Client {
+    @Id     //主キー
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //自動生成
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 30)
+    private String name;
+
+    @Column(name = "post_code")
+    private Integer postCode;
+
+    @Column(name = "telephone_number")
+    private Integer telephoneNumber;
+
+    @Column(name = "fax")
+    private Integer fax;
+
+    @Column(name = "address",length = 100)
+    private String address;
+
+    @Column(name = "note",length = 200)
+    private String note;
+
+    /**
+     * OneToMany 多数のプロジェクトを持つ
+     * cascade 元が消えたらどうするか
+     */
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Project> projects;
+}
