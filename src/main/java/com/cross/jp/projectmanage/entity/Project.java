@@ -39,8 +39,8 @@ public class Project {
     @Column(name = "manager")
     private Integer manager;
 
-    @Column(name = "check")
-    private Boolean check;
+    @Column(name = "check_payment")
+    private Boolean checkPayment;
 
     @ManyToOne
     @JoinColumn(name = "client_id")

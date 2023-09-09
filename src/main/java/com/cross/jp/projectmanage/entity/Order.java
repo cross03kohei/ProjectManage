@@ -8,12 +8,12 @@ import lombok.Setter;
  * orderテーブルの情報
  */
 @Entity
-@Table(name = "order")
+@Table(name = "order_detail")
 @Getter
 @Setter
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //自動生成される
+    @Id     //主キー
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //自動生成
     private Integer id;
 
     @Column(name = "item_category")
