@@ -6,10 +6,7 @@ import com.cross.jp.projectmanage.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +17,13 @@ public class ClientController {
     ClientService service;
     @GetMapping("/list")
     public String clientList(Model model){
-        List<Client> clientList;
+        List<Client> clientList = service.getClientList();
+        model.addAttribute("clientList",clientList);
         return "client_list";
+    }
+    @GetMapping("/{id}")
+    public String clientDetail(Model model, @PathVariable("id")Integer id){
+        return "";
     }
     @GetMapping("/add")
     public String addClient(Model model){

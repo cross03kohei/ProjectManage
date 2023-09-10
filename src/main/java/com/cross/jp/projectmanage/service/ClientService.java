@@ -6,10 +6,15 @@ import com.cross.jp.projectmanage.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClientService {
     @Autowired
     ClientRepository clientRepository;
+    public List<Client> getClientList(){
+        return clientRepository.findAll();
+    }
 
     public void save(ClientDto clientDto){
         clientRepository.save(createClient(clientDto));

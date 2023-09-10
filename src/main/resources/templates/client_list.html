@@ -20,9 +20,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>久保田</td>
-                    <td><button>詳細</button></td>
+                <tr th:each="client : ${clientList}">
+                    <td th:text="${client.name}"></td>
+                    <td>
+                        <form th:action="@{'/client/' + ${client.id}}">
+                            <input type="hidden" th:value="${client.id}">
+                            <input type="submit" value="詳細">
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
