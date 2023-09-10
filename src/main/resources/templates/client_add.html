@@ -10,7 +10,7 @@
         <form th:action="@{/client/save}" th:object="${clientDto}" method="post">
             <div class="client_name">
                 <label>顧客名</label>
-                <input type="text" th:field="*{name}">
+                <input type="text" th:field="*{name}" th:value="${name}">
             </div>
             <div class="post_code">
                 <label>郵便番号</label>
