@@ -1,4 +1,4 @@
-package com.cross.jp.projectmanage;
+package com.cross.jp.projectmanage.service;
 
 import com.cross.jp.projectmanage.repository.ClientRepository;
 import com.cross.jp.projectmanage.repository.OrderRepository;
@@ -8,10 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectService {
-    @Autowired
-    ClientRepository clientRepository;
-    @Autowired
-    OrderRepository orderRepository;
     @Autowired
     ProjectRepository projectRepository;
 }
