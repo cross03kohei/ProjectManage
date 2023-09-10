@@ -23,7 +23,9 @@ public class ClientController {
     }
     @GetMapping("/{id}")
     public String clientDetail(Model model, @PathVariable("id")Integer id){
-        return "";
+        Client client = service.getClient(id);
+        model.addAttribute("client",client);
+        return "client_detail";
     }
     @GetMapping("/add")
     public String addClient(Model model){

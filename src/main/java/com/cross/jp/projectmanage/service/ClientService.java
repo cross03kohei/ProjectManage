@@ -15,6 +15,7 @@ public class ClientService {
     public List<Client> getClientList(){
         return clientRepository.findAll();
     }
+    public Client getClient(Integer id){return clientRepository.getByIdClient(id);}
 
     public void save(ClientDto clientDto){
         clientRepository.save(createClient(clientDto));
