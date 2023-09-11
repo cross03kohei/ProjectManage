@@ -6,7 +6,7 @@
 </head>
 <body>
     <h3>顧客情報登録</h3>
-    <div class="client_form">
+    <div id="client_edit_form">
         <form th:action="@{/client/save}" th:object="${clientDto}" method="post">
             <div class="client_name">
                 <label>顧客名</label>

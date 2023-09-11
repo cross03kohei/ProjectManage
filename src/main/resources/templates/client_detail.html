@@ -51,5 +51,12 @@
             </div>
         </form>
     </div>
+    <div id="client_delete_form">
+        <form th:action="@{'/client/delete/' + ${client.id}}">
+            <p>削除しますか</p>
+            <input type="submit" value="YES">
+            <button id="cancel">NO</button>
+        </form>
+    </div>
 </body>
 </html>

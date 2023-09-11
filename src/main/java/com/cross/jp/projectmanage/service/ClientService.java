@@ -20,6 +20,7 @@ public class ClientService {
     public void save(ClientDto clientDto){
         clientRepository.save(createClient(clientDto));
     }
+    public void delete(Client client){ clientRepository.delete(client);}
     private Client createClient(ClientDto c){
         Client client = new Client();
         client.setId(c.getId());

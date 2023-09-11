@@ -43,7 +43,13 @@ public class ClientController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveClient(@ModelAttribute ClientDto clientDto, Model model){
         service.save(clientDto);
-        return "redirect:/project/list";
+        return "redirect:/client/list";
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteClient(@PathVariable("id")Integer id){
+        Client client = service.getClient(id);
+        service.delete(client);
+        return "redirect:/client/list";
     }
     private ClientDto createDto(Integer id,String name, String postCode, String address,
                                 String telephoneNumber, String fax,String note){
