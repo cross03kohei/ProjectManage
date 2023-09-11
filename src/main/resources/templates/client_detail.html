@@ -5,6 +5,51 @@
     <title>顧客詳細</title>
 </head>
 <body>
-    <h3>[[${client.name}]]</h3>
+    <div class="client_detail">
+        <h3>[[${client.name}]]</h3>
+        <p>電話番号</p>
+        <p th:text="${client.telephoneNumber}"></p>
+        <p>FAX</p>
+        <p th:text="${client.fax}"></p>
+        <p>住所</p>
+        <p th:text="${client.postCode}"></p>
+        <p th:text="${client.address}"></p>
+        <p>備考</p>
+        <p th:text="${client.note}"></p>
+    </div>
+    <div class="client_edit">
+        <button id="edit_button">編集</button>
+    </div>
+    <div class="client_edit">
+        <form th:action="@{'/client/edit/' + ${client.id}}">
+            <div class="client_name">
+                <label>顧客名</label>
+                <input type="text" name="name" th:value="${client.name}">
+            </div>
+            <div class="post_code">
+                <label>郵便番号</label>
+                <input type="text" name="post_code" th:value="${client.postCode}">
+            </div>
+            <div class="address">
+                <label>住所</label>
+                <input type="text" name="address" th:value="${client.address}">
+            </div>
+            <div class="telephone_number">
+                <label>TEL</label>
+                <input type="text" name="phone" th:value="${client.telephoneNumber}">
+            </div>
+            <div class="fax">
+                <label>FAX</label>
+                <input type="text" name="fax" th:value="${client.fax}">
+            </div>
+            <div class="note">
+                <label>備考</label>
+                <textarea rows="10" cols="100" name="note">[[${client.note}]]</textarea>
+            </div>
+            <div class="sumbit">
+                <input type="submit" value="編集">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
