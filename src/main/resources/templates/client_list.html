@@ -6,7 +6,7 @@
 </head>
 <body>
     <h3>顧客一覧</h3>
-    <form>
+    <form th:action="@{/client/search}">
         <input type="text" name="name">
         <input type="submit" value="検索">
     </form>

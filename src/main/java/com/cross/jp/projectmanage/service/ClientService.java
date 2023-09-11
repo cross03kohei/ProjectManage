@@ -16,6 +16,7 @@ public class ClientService {
         return clientRepository.findAll();
     }
     public Client getClient(Integer id){return clientRepository.getByIdClient(id);}
+    public List<Client> searchClient(String name){return clientRepository.getByNameClientList(name);}
 
     public void save(ClientDto clientDto){
         clientRepository.save(createClient(clientDto));

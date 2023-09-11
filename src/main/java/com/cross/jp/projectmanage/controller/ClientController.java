@@ -4,6 +4,7 @@ import com.cross.jp.projectmanage.dto.ClientDto;
 import com.cross.jp.projectmanage.entity.Client;
 import com.cross.jp.projectmanage.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,12 @@ public class ClientController {
     @GetMapping("/list")
     public String clientList(Model model){
         List<Client> clientList = service.getClientList();
+        model.addAttribute("clientList",clientList);
+        return "client_list";
+    }
+    @GetMapping("/search")
+    public String searchClient(Model model,@RequestParam("name")String name){
+        List<Client> clientList = service.searchClient(name);
         model.addAttribute("clientList",clientList);
         return "client_list";
     }
