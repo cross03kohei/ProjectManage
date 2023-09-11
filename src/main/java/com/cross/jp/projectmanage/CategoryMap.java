@@ -5,8 +5,8 @@ import java.util.Map;
 //カテゴリーをMapで管理
 public class CategoryMap {
     public static Map<Integer,String> items = new HashMap<>(); //商品
-    private static Map<Integer,String> manager = new HashMap<>();   //担当者
-    private static Map<Integer,String> prohress = new HashMap<>();  //進歩状況
+    public static Map<Integer,String> manager = new HashMap<>();   //担当者
+    public static Map<Integer,String> progress = new HashMap<>();  //進歩状況
     static {
         items.put(0,"名刺");
         items.put(1,"封筒");
@@ -22,8 +22,8 @@ public class CategoryMap {
         manager.put(0,"久保田恵明");
         manager.put(1,"久保田満穂");
 
-        prohress.put(0,"未着手");
-        prohress.put(1,"進行中");
-        prohress.put(2,"完了");
+        progress.put(0,"未着手");
+        progress.put(1,"進行中");
+        progress.put(2,"完了");
     }
 }
