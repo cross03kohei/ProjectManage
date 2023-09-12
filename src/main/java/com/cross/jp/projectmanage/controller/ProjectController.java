@@ -14,6 +14,7 @@ public class ProjectController {
     public String projectList(Model model){
         return "index";
     }
+
     @GetMapping("/add")
     public String addProject(Model model){
         model.addAttribute("projectDto",new ProjectDto());
