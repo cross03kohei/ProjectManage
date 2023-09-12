@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>プロジェクトの登録</title>
-</head>
+<head th:replace="head :: head(title = 'プロジェクト登録', scripts = ~{}, links = ~{})"></head>
 <body>
     <h3>プロジェクト情報登録</h3>
     <div class="project_form">
@@ -11,7 +8,7 @@
             <div class="client_name">
                 <label>顧客名</label>
                 <input type="text">
-                <input type="hidden" name="id" th:field="${clientId}" id="client_id">
+                <input type="hidden" name="id" th:field="*{clientId}" id="client_id">
             </div>
             <div class="item">
                 <label>商品名</label>
