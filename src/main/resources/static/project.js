@@ -1,3 +1,10 @@
 jQuery(function ($) {
-console.log("hello");
+    $.ajax({
+    url:"json",
+    type: "GET",
+    dataType: "json",
+    success : function(data,status,xhr) {
+        $("#chktest").val(data);
+    },
+    })
 });
