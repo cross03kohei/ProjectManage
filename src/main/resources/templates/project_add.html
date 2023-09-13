@@ -55,30 +55,21 @@
     <div class="client_search">
         <h3>顧客名検索</h3>
         <form>
-            <input type="text" name="name">
+            <input type="text" name="name" id="client_text">
             <input type="button" id="search_button" value="検索">
         </form>
-        <div class="client_table">
-            <table>
-                <thead>
-                <tr>
-                    <td>顧客名</td>
-                    <td></td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="client : ${clientList}">
-                    <td th:text="${client.name}"></td>
-                    <td>
-                        <form th:action="@{'/client/' + ${client.id}}">
-                            <input type="hidden" th:value="${client.id}">
-                            <input type="submit" value="詳細">
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table id="client_table">
+            <thead>
+            <tr>
+                <td>顧客名</td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="client_tr">
+            </tr>
+            </tbody>
+        </table>
     </div>
     <script type="text/javascript" th:src="@{/js/project.js}"></script>
 </body>

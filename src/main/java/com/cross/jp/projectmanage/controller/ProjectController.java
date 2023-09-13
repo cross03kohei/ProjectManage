@@ -37,7 +37,8 @@ public class ProjectController {
     public String getJsonData(SearchForm form){
         String name = form.getName();
         List<Client> clients = clientService.searchClient(name);
-        return "";
+        Gson gson = new Gson();
+        return gson.toJson(clients);
     }
 
 }
