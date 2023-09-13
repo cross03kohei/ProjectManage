@@ -2,18 +2,23 @@ package com.cross.jp.projectmanage.controller;
 
 import com.cross.jp.projectmanage.CategoryMap;
 import com.cross.jp.projectmanage.dto.ProjectDto;
+import com.cross.jp.projectmanage.entity.Client;
+import com.cross.jp.projectmanage.form.SearchForm;
+import com.cross.jp.projectmanage.service.ClientService;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/project")
 public class ProjectController {
+    @Autowired
+    ClientService clientService;
     @GetMapping("/list")
     public String projectList(Model model){
         return "index";
@@ -27,11 +32,12 @@ public class ProjectController {
         model.addAttribute("progress",CategoryMap.progress);
         return "project_add";
     }
-    @RequestMapping(value = "json",method = RequestMethod.GET)
+    @PostMapping(value = "json")
     @ResponseBody
-    public String getJsonData(ModelMap model){
-        Gson gson = new Gson();
-        return gson.toJson("test");
+    public String getJsonData(SearchForm form){
+        String name = form.getName();
+        List<Client> clients = clientService.searchClient(name);
+        return "";
     }
 
 }
