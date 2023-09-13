@@ -53,23 +53,11 @@
         </form>
     </div>
     <div class="client_search">
-        <h3>顧客名検索</h3>
         <form>
             <input type="text" name="name" id="client_text">
             <input type="button" id="search_button" value="検索">
         </form>
-        <table id="client_table">
-            <thead>
-            <tr>
-                <td>顧客名</td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr id="client_tr">
-            </tr>
-            </tbody>
-        </table>
+        <ul id="client_ul"></ul>
     </div>
     <script type="text/javascript" th:src="@{/js/project.js}"></script>
 </body>
