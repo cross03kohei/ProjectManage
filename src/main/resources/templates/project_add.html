@@ -8,8 +8,7 @@
         <form th:action="@{/project/save}" th:object="${projectDto}" method="post">
             <div class="client_name">
                 <label>顧客名</label>
-                <input type="text">
-                <input type="hidden" name="id" th:field="*{clientId}" id="client_id">
+                <input type="text" th:field="*{clientId}">
             </div>
             <div class="item">
                 <label>商品名</label>
@@ -43,7 +42,7 @@
                             th:text="${progress.value}" th:selected="${progress.key == 0}"></option>
                 </select>
             </div>
-            <div class="delivery_date" th:field="*{delivery_date}">
+            <div class="delivery_date" th:field="*{deliveryDate}">
                 <label>納品日</label>
                 <input type="date">
             </div>

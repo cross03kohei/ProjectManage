@@ -15,5 +15,5 @@ public class ProjectDto {
     private Integer manager;
     private String receptionDate;
     private Integer progress;
-    private String delivery_date;
+    private String deliveryDate;
 }
