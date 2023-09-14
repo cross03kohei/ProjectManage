@@ -20,11 +20,10 @@ public class ProjectController {
     @Autowired
     ClientService clientService;
     @Autowired
-     service;
+    OrderService service;
 
     @GetMapping("/list")
     public String projectList(Model model){
-
         return "index";
     }
 
