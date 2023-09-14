@@ -6,31 +6,31 @@
 </head>
 <body>
     <h3>顧客情報登録</h3>
-    <div class="client_form">
-        <form>
+    <div id="client_edit_form">
+        <form th:action="@{/client/save}" th:object="${clientDto}" method="post">
             <div class="client_name">
                 <label>顧客名</label>
-                <input type="text">
+                <input type="text" th:field="*{name}">
             </div>
             <div class="post_code">
                 <label>郵便番号</label>
-                <input type="text">
+                <input type="text" th:field="*{postCode}">
             </div>
             <div class="address">
                 <label>住所</label>
-                <input type="text">
+                <input type="text" th:field="*{address}">
             </div>
             <div class="telephone_number">
                 <label>TEL</label>
-                <input type="text">
+                <input type="text" th:field="*{telephoneNumber}">
             </div>
             <div class="fax">
                 <label>FAX</label>
-                <input type="text">
+                <input type="text" th:field="*{fax}">
             </div>
             <div class="note">
                 <label>備考</label>
-                <textarea rows="10" cols="100"></textarea>
+                <textarea rows="10" cols="100" th:field="*{note}"></textarea>
             </div>
             <div class="sumbit">
                 <input type="submit" value="登録">
@@ -40,3 +40,4 @@
 
 </body>
 </html>
+
