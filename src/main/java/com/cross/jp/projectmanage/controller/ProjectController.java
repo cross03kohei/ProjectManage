@@ -3,15 +3,13 @@ package com.cross.jp.projectmanage.controller;
 import com.cross.jp.projectmanage.CategoryMap;
 import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
-import com.cross.jp.projectmanage.entity.Project;
 import com.cross.jp.projectmanage.form.SearchForm;
 import com.cross.jp.projectmanage.service.ClientService;
-import com.cross.jp.projectmanage.service.ProjectService;
+import com.cross.jp.projectmanage.service.OrderService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +20,8 @@ public class ProjectController {
     @Autowired
     ClientService clientService;
     @Autowired
-    ProjectService service;
+    OrderService service;
+
     @GetMapping("/list")
     public String projectList(Model model){
 
@@ -38,8 +37,8 @@ public class ProjectController {
         return "project_add";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProject(@ModelAttribute ProjectDto projectDto){
-        service.save(projectDto);
+    public String saveProject(@ModelAttribute ProjectDto dto){
+        service.save(dto);
         return "redirect:/project/list";
     }
     @PostMapping(value = "json")
