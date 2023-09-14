@@ -20,7 +20,7 @@ public class ProjectController {
     @Autowired
     ClientService clientService;
     @Autowired
-    OrderService service;
+     service;
 
     @GetMapping("/list")
     public String projectList(Model model){
