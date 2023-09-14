@@ -1,5 +1,6 @@
 package com.cross.jp.projectmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,10 +37,5 @@ public class Client {
     @Column(name = "note",length = 200)
     private String note;
 
-    /**
-     * OneToMany 多数のプロジェクトを持つ
-     * cascade 元が消えたらどうするか
-     */
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Project> projects;
+
 }

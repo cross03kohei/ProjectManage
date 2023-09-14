@@ -48,7 +48,7 @@ public class ProjectService {
         order.setAmount(dto.getAmount());
         order.setQuantity(dto.getQuantity());
         order.setItemCategory(dto.getItem());
-        order.setProject(p);
+
         return order;
     }
 }

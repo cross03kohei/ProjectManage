@@ -1,5 +1,6 @@
 package com.cross.jp.projectmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,39 @@ public class Order {
     @Column(name = "amount")
     private Integer amount;
 
+    /**プロジェクト関係
+     * 受付日
+     */
+    @Column(name = "reception_date",length = 10)
+    private String receptionDate;
+
+    /**
+     * 納品日
+     */
+    @Column(name = "delivery_date", length = 10)
+    private String deliveryDate;
+
+    /**
+     * 進歩状況(Mapで管理するためINT型)
+     */
+    @Column(name = "progress")
+    private Integer progress;
+
+    /**
+     * 担当者(Mapで管理するためINT型)
+     */
+    @Column(name = "manager")
+    private Integer manager;
+
+    /**
+     * 入金済みのチェック
+     */
+    @Column(name = "check_payment")
+    private Boolean checkPayment;
+
+
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinColumn(name = "client_id")
+    @JsonIgnore
+    private Client client;
 }

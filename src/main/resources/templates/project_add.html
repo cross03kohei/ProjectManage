@@ -56,7 +56,15 @@
             <input type="text" name="name" id="client_text">
             <input type="button" id="search_button" value="検索">
         </form>
-        <ul id="client_ul"></ul>
+        <table>
+            <thead>
+                <tr>
+                    <td>顧客名</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody id="client_body">
+        </table>
     </div>
     <script type="text/javascript" th:src="@{/js/project.js}"></script>
 </body>
