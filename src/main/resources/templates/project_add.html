@@ -42,9 +42,9 @@
                             th:text="${progress.value}" th:selected="${progress.key == 0}"></option>
                 </select>
             </div>
-            <div class="delivery_date" th:field="*{deliveryDate}">
+            <div class="delivery_date">
                 <label>納品日</label>
-                <input type="date">
+                <input type="date" th:field="*{deliveryDate}">
             </div>
             <div class="submit">
                 <input type="submit" value="登録">

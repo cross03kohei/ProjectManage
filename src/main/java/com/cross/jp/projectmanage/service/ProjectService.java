@@ -18,27 +18,37 @@ public class ProjectService {
     ProjectRepository projectRepository;
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    OrderRepository orderRepository;
 
     public void save(ProjectDto dto){
         Project project = createProject(dto);
         projectRepository.save(project);
+        Project getProject = getTop1(dto.getClientId());
+        orderRepository.save(createOrder(dto,getProject));
+    }
+    private Project getTop1(Integer id){
+        List<Project> projects = projectRepository.getSaveProject(id);
+        return projects.get(0);
     }
     private Project createProject(ProjectDto dto){
         Project project = new Project();
-        Order order = new Order();
 
         project.setManager(dto.getManager());
         project.setProgress(dto.getProgress());
         project.setDeliveryDate(dto.getDeliveryDate());
         project.setReceptionDate(dto.getReceptionDate());
 
+        project.setClient(clientRepository.getByIdClient(dto.getClientId()));
+        return project;
+    }
+    private Order createOrder(ProjectDto dto,Project p){
+        Order order = new Order();
+
         order.setAmount(dto.getAmount());
         order.setQuantity(dto.getQuantity());
         order.setItemCategory(dto.getItem());
-        List<Order> orders = new ArrayList<>();
-        orders.add(order);
-        project.setOrders(orders);
-        project.setClient(clientRepository.getByIdClient(dto.getClientId()));
-        return project;
+        order.setProject(p);
+        return order;
     }
 }

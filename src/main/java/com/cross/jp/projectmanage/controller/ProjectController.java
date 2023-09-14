@@ -3,6 +3,7 @@ package com.cross.jp.projectmanage.controller;
 import com.cross.jp.projectmanage.CategoryMap;
 import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
+import com.cross.jp.projectmanage.entity.Project;
 import com.cross.jp.projectmanage.form.SearchForm;
 import com.cross.jp.projectmanage.service.ClientService;
 import com.cross.jp.projectmanage.service.ProjectService;
@@ -24,6 +25,7 @@ public class ProjectController {
     ProjectService service;
     @GetMapping("/list")
     public String projectList(Model model){
+
         return "index";
     }
 

@@ -46,6 +46,6 @@ public class Project {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Order> orders;
 }
