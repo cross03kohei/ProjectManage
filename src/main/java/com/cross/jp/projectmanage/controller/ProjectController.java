@@ -61,6 +61,10 @@ public class ProjectController {
         model.addAttribute("progress",CategoryMap.progress);
         return "project_add";
     }
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public String editProject(){
+        return "redirect:/project/list";
+    }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveProject(@ModelAttribute ProjectDto dto){
         service.save(dto);
