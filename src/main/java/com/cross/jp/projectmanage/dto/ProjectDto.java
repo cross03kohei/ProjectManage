@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class ProjectDto {
     private Integer clientId;
+    private String clientName;
     private Integer item;
     private Integer quantity;
     private Integer amount;

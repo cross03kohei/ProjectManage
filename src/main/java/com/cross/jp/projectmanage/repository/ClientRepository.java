@@ -15,4 +15,5 @@ public interface ClientRepository extends JpaRepository<Client,Integer> {
     Client getByIdClient(@Param("id")Integer id);
     @Query("SELECT m FROM Client m WHERE m.name LIKE %:name" + "%")
     List<Client> getByNameClientList(@Param("name")String name);
+
 }
