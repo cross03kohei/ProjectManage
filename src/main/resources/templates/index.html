@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>プロジェクト管理</title>
+<head th:replace="head :: head(title = 'プロジェクト一覧',scripts = ~{}, links = ~{})">
 </head>
 <body>
 <!--    ヘッダーの呼び出し-->
@@ -21,13 +19,15 @@
             </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>2022-10-31</td>
-            <td>kubota</td>
-            <td>チラシ</td>
-            <td>久保田義明</td>
+        <tr th:each=" no : ${no}">
+            <td th:text="${no.receptionDate}"></td>
+            <td th:text="${no.Client.name}"></td>
+            <td th:text="${item.get(no.itemCategory)}"></td>
+            <td th:text="${manager.get(no.manager)}"></td>
             <td>
-                <button>編集</button>
+                <button th:value="${no.id}" id="edit_button" data-bs-toggle="modal" data-bs-target="#projectEdit"type="button" class="btn btn-primary">
+                    編集
+                </button>
             </td>
         </tr>
         </tbody>
@@ -46,13 +46,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>2022-10-31</td>
-                <td>kubota</td>
-                <td>チラシ</td>
-                <td>久保田義明</td>
+            <tr th:each=" ing : ${ing}">
+                <td th:text="${ing.receptionDate}"></td>
+                <td th:text="${ing.Client.name}"></td>
+                <td th:text="${item.get(ing.itemCategory)}"></td>
+                <td th:text="${manager.get(ing.manager)}"></td>
                 <td>
-                    <button>編集</button>
+                    <button th:value="${ing.id}" id="ing_button" data-bs-toggle="modal" data-bs-target="#projectEdit"type="button" class="btn btn-primary">
+                        編集
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -71,19 +73,74 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>2022-10-31</td>
-                <td>kubota</td>
-                <td>チラシ</td>
-                <td>久保田義明</td>
+            <tr th:each=" end : ${end}">
+                <td th:text="${end.receptionDate}"></td>
+                <td th:text="${end.Client.name}"></td>
+                <td th:text="${item.get(end.itemCategory)}"></td>
+                <td th:text="${manager.get(end.manager)}"></td>
                 <td>
-                    <button>編集</button>
+                    <button th:value="${ing.id}" id="end_button" data-bs-toggle="modal" data-bs-target="#projectEdit"type="button" class="btn btn-primary">
+                        編集
+                    </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 
-</body>
+<div class="modal fade" id="projectEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/project/edit}">
+                    <div class="client_name">
+                        <label>顧客名</label>
+                        <input type="text" name="clientId" id="clientId">
+                        <input type="text" name="name" id="name">
+                        <input type="hidden" name="id" id="id">
+                    </div>
+                    <div class="item">
+                        <label>商品名</label>
+                        <select name="item" id="item">
+                            <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" selected></option>
+                        </select>
+                    </div>
+                    <div class="quantity">
+                        <label>数量</label>
+                        <input type="text" name="quantity" id="quantity">
+                    </div>
+                    <div class="amount">
+                        <label>金額</label>
+                        <input type="text" name="amount" id="amount">
+                    </div>
+                    <div class="manager">
+                        <label>担当者</label>
+                        <select name="manager" id="manager">
+                            <option th:each="manager : ${manager}" th:value="${manager.key}"
+                                    th:text="${manager.value}" selected></option>
+                        </select>
+                    </div>
+                    <div class="progress">
+                        <label>状況</label>
+                        <select name="progress" id="progress">
+                            <option th:each="progress : ${progress}" th:value="${progress.key}"
+                                    th:text="${progress.value}" selected></option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <input type="submit" class="btn btn-primary" value="決定">
+                    </div>
+                </form>
+            </div>
 
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
 </html>

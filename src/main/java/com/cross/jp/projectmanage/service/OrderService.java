@@ -17,6 +17,9 @@ public class OrderService {
     @Autowired
     ClientRepository clientRepository;
 
+    public List<Order> findAll(){ return orderRepository.findAll();}
+    public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
+
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));
     }
@@ -30,7 +33,7 @@ public class OrderService {
             c.setName(dto.getClientName());
             clientRepository.save(c);
             List<Client> clientList = clientRepository.findAll();
-            Integer id = clientList.get(0).getId();
+            Integer id = clientList.get(clientList.size() -1).getId();
             o.setClient(clientRepository.getByIdClient(id));
         }
         o.setItemCategory(dto.getItem());
