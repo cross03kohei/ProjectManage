@@ -8,14 +8,13 @@
     <h3 th:text="${date}"></h3>
     <h3>売上管理</h3>
     <div class="search">
-        <form>
+        <form th:action="@{/proceeds/search}">
             <label>日付</label>
-            <input type="month">
+            <input type="month" name="date">
             <label>商品</label>
-            <select name="itme" >
-                <option value="0">すべて</option>
-                <option value="1">名刺</option>
-                <option value="2">封筒</option>
+            <select name="item">
+                <option value="10">すべて</option>
+                <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 10}"></option>
             </select>
             <input type="submit" value="選択">
         </form>

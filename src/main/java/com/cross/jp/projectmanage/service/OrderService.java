@@ -20,10 +20,12 @@ public class OrderService {
 
     public List<Order> findAll(){ return orderRepository.findAll();}
     public List<Order> getByMouthProceeds(String date){
-        String nowDate = date.replace('/','-');
-        return orderRepository.getByMouthOrder(nowDate);
+        return orderRepository.getByMouthOrder(date);
     }
     public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
+    public List<Order> search(String date,Integer item){
+        return orderRepository.getByMouthOrder(date);
+    }
 
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));
