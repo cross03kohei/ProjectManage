@@ -39,7 +39,7 @@ public class Client {
     @Column(name = "note",length = 200)
     private String note;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client",orphanRemoval = true)
     @JsonManagedReference
     private List<Order> orders;
 }
