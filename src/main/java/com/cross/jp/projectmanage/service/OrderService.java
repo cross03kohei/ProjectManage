@@ -23,6 +23,7 @@ public class OrderService {
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));
     }
+    public void edit(Order order){ orderRepository.save(order);}
     private Order createOrder(ProjectDto dto){
         Order o = new Order();
         if(dto.getClientId() != null){
