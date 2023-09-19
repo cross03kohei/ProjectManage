@@ -26,9 +26,11 @@ public class ProceedsController {
     public String proceedsList(Model model){
         String date = nowDate();
         List<Order> orders = service.getByMouthProceeds(date);
+        int allAmount = allAmount(orders);
         model.addAttribute("date",date);
         model.addAttribute("order",orders);
         model.addAttribute("item",CategoryMap.items);
+        model.addAttribute("allAmount",allAmount);
         return "proceeds";
     }
     @GetMapping("/search")
@@ -45,5 +47,12 @@ public class ProceedsController {
         SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM");
         String nowDate = sformat.format(date);
         return nowDate.replace('/','-');
+    }
+    private int allAmount(List<Order> orders){
+        int amount = 0;
+        for(Order order : orders){
+            amount += order.getAmount();
+        }
+        return amount;
     }
 }

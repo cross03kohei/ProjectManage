@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>売上管理</title>
+<head th:replace="head :: head(title = '売上管理',scripts = ~{}, links = ~{})">
 </head>
 <body>
     <h3 th:text="${date}"></h3>
@@ -23,25 +21,26 @@
         <table>
             <thead>
                 <tr>
-                    <td>納品日</td>
-                    <td>顧客名</td>
-                    <td>商品</td>
-                    <td>金額</td>
+                    <th>納品日</th>
+                    <th>顧客名</th>
+                    <th>商品</th>
+                    <th>金額</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2023-08-24</td>
-                    <td>久保田耕平</td>
-                    <td>チラシ</td>
-                    <td>2000</td>
+                <tr th:each=" order : ${order}">
+                    <td th:text="${order.deliveryDate}"></td>
+                    <td th:text="${order.client.name}"></td>
+                    <td th:text="${item.get(order.itemCategory)}"></td>
+                    <td th:text="${order.amount}"></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <h5>合計</h5><p>1000円</p>
+    <h5>合計</h5><p th:text="${allAmount}"></p>
     <div class="button_csv">
-        <button type="submit">CSVに出力</button>
+        <button id="csv_btn">CSVに出力</button>
     </div>
+    <script type="text/javascript" th:src="@{/js/proceeds.js}"></script>
 </body>
 </html>
