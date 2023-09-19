@@ -8,6 +8,7 @@ import com.cross.jp.projectmanage.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +19,10 @@ public class OrderService {
     ClientRepository clientRepository;
 
     public List<Order> findAll(){ return orderRepository.findAll();}
+    public List<Order> getByMouthProceeds(String date){
+        String nowDate = date.replace('/','-');
+        return orderRepository.getByMouthOrder(nowDate);
+    }
     public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
 
     public void save(ProjectDto dto){
