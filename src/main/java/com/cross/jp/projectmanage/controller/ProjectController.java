@@ -61,11 +61,11 @@ public class ProjectController {
         model.addAttribute("progress",CategoryMap.progress);
         return "project_add";
     }
-    @GetMapping("/endCheck")
+    @GetMapping("/check")
     public String editProject(@RequestParam("id")Integer id,
                               @RequestParam("progress")Integer progress,
                               @RequestParam("endCheck")Boolean endCheck){
-        if(progress == 2 && endCheck != null){
+        if(progress == 2 && endCheck){
             Order o = service.findById(id);
             o.setEndCheck(true);
             service.edit(o);

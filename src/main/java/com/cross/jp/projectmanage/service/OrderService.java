@@ -49,6 +49,7 @@ public class OrderService {
         o.setAmount(dto.getAmount());
         o.setManager(dto.getManager());
         o.setProgress(dto.getProgress());
+        o.setEndCheck(false);
         o.setDeliveryDate(dto.getDeliveryDate());
         o.setReceptionDate(dto.getReceptionDate());
         return o;

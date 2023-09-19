@@ -96,7 +96,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/project/endCheck}">
+                <form th:action="@{/project/check}">
                     <div class="client_name">
                         <label>顧客名</label>
                         <input type="text" name="clientId" id="clientId">
@@ -148,7 +148,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/project/endCheck}">
+                <form th:action="@{/project/check}">
                     <input type="hidden" name="id" id="endId">
                     <label>進行状況</label>
                     <select name="progress" id="endProgress">
