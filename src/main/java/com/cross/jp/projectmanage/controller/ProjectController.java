@@ -5,6 +5,8 @@ import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
 import com.cross.jp.projectmanage.entity.Order;
 import com.cross.jp.projectmanage.form.SearchForm;
+import com.cross.jp.projectmanage.json.ClientJson;
+import com.cross.jp.projectmanage.json.ProjectJson;
 import com.cross.jp.projectmanage.service.ClientService;
 import com.cross.jp.projectmanage.service.OrderService;
 import com.google.gson.Gson;
@@ -84,18 +86,38 @@ public class ProjectController {
     @PostMapping(value = "json")
     @ResponseBody
     public String getJsonData(SearchForm form){
+        List<ClientJson> json = new ArrayList<>(); //json用のリスト
         String name = form.getName();
         List<Client> clients = clientService.searchClient(name);
+        //無限参照でスタックエラーがおこるのでJson用の型のリストに格納
+        for (Client client : clients) {
+            ClientJson c = new ClientJson();
+            c.setId(client.getId());
+            c.setName(client.getName());
+            json.add(c);
+        }
         Gson gson = new Gson();
-        return gson.toJson(clients);
+        return gson.toJson(json);
     }
     @PostMapping(value = "edit")
     @ResponseBody
     public String copyValue(String id){
         Integer orderId = Integer.parseInt(id);
-        Order order = service.findById(orderId);
+        ProjectJson json = createJson(service.findById(orderId));
         Gson gson = new Gson();
-        return gson.toJson(order);
+        return gson.toJson(json);
+    }
+
+    private ProjectJson createJson(Order o){
+        ProjectJson json = new ProjectJson();
+        Client c = o.getClient();
+        json.setId(o.getId());
+        json.setName(c.getName());
+        json.setItem(o.getItemCategory());
+        json.setQuantity(o.getQuantity());
+        json.setAmount(o.getAmount());
+        json.setManager(o.getManager());
+        return json;
     }
 
 }

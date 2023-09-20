@@ -13,11 +13,11 @@ jQuery(function ($) {
                 })
                 .done(function(data) {
                     $("#id").val(data.id);
-                    $("#name").val(data.client.name);
-                    $("#clientId").val(data.client.id);
-                    $("#progress").val(data.progress);
-                    $("#item").val(data.itemCategory);
+                    $("#name").text("顧客名：" + data.name);
+                    $("#item").val(data.item);
                     $("#manager").val(data.manager);
+                    $("#quantity").val(data.quantity);
+                    $("#amount").val(data.amount);
 
                     $("#endId").val(data.id);
                     $("endProgress").val(data.progress);
