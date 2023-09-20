@@ -1,11 +1,14 @@
 package com.cross.jp.projectmanage.service;
 
+import com.cross.jp.projectmanage.ProjectSpecification;
 import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
 import com.cross.jp.projectmanage.entity.Order;
 import com.cross.jp.projectmanage.repository.ClientRepository;
 import com.cross.jp.projectmanage.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,9 +21,12 @@ public class OrderService {
     @Autowired
     ClientRepository clientRepository;
 
+
     public List<Order> findAll(){ return orderRepository.findAll();}
     public List<Order> getByMouthProceeds(String date){
-        return orderRepository.getByMouthOrder(date);
+        ProjectSpecification spec = new ProjectSpecification();
+        return orderRepository.findAll(Specification.where(spec.deliveryDateContains(date).
+                and(spec.checkContains(true))));
     }
     public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
     public List<Order> search(String date,Integer item){

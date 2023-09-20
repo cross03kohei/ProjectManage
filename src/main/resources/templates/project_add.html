@@ -57,7 +57,7 @@
             <input type="text" name="name" id="client_text">
             <input type="button" id="search_button" value="検索">
         </form>
-        <table>
+        <table id="clientTable">
             <thead>
                 <tr>
                     <td>顧客名</td>
@@ -65,6 +65,9 @@
                 </tr>
                 </thead>
                 <tbody id="client_body">
+                <td id="name"></td>
+                <td></td>
+                </tbody>
         </table>
     </div>
     <script type="text/javascript" th:src="@{/js/project.js}"></script>

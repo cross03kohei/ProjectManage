@@ -43,6 +43,9 @@ public class ProjectController {
                 ingProject.add(project);
             }
             if (project.getProgress() == 2) {
+                if(project.getEndCheck()){
+                    continue;
+                }
                 endProject.add(project);
             }
         }
@@ -63,19 +66,22 @@ public class ProjectController {
         model.addAttribute("progress",CategoryMap.progress);
         return "project_add";
     }
+    @GetMapping("/progress")
+    public String editProject(@RequestParam("id")Integer id,@RequestParam("item")Integer item,
+                              @RequestParam("quantity")Integer quantity){
+        return "redirect:/project/list";
+    }
     @GetMapping("/check")
-    public String editProject(@RequestParam("id")Integer id,
+    public String checkProject(@RequestParam("id")Integer id,
                               @RequestParam("progress")Integer progress,
                               @RequestParam("endCheck")Boolean endCheck){
+        Order o = service.findById(id);
         if(progress == 2 && endCheck){
-            Order o = service.findById(id);
             o.setEndCheck(true);
-            service.edit(o);
         }else{
-            Order o = service.findById(id);
             o.setProgress(progress);
-            service.edit(o);
         }
+        service.edit(o);
         return "redirect:/project/list";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
