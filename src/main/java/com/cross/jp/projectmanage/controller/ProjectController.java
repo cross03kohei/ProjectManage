@@ -43,9 +43,6 @@ public class ProjectController {
                 ingProject.add(project);
             }
             if (project.getProgress() == 2) {
-                if(project.getEndCheck()){
-                    continue;
-                }
                 endProject.add(project);
             }
         }
@@ -68,7 +65,9 @@ public class ProjectController {
     }
     @GetMapping("/progress")
     public String editProject(@RequestParam("id")Integer id,@RequestParam("item")Integer item,
-                              @RequestParam("quantity")Integer quantity){
+                              @RequestParam("quantity")Integer quantity,@RequestParam("amount")Integer amount,
+                              @RequestParam("manager")Integer manager,@RequestParam("progress")Integer progress){
+        service.edit(createProject(id,item,quantity,amount,manager,progress));
         return "redirect:/project/list";
     }
     @GetMapping("/check")
@@ -124,6 +123,16 @@ public class ProjectController {
         json.setAmount(o.getAmount());
         json.setManager(o.getManager());
         return json;
+    }
+    private Order createProject(Integer id,Integer item,Integer quantity,
+                                 Integer amount,Integer manager,Integer progress){
+        Order o = service.findById(id);
+        o.setItemCategory(item);
+        o.setQuantity(quantity);
+        o.setAmount(amount);
+        o.setManager(manager);
+        o.setProgress(progress);
+        return o;
     }
 
 }

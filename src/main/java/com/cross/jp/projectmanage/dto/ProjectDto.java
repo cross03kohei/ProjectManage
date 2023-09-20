@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ProjectDto {
+    private Integer id;
     private Integer clientId;
     private String clientName;
     private Integer item;

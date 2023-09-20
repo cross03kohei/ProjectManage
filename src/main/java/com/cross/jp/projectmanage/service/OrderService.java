@@ -60,7 +60,7 @@ public class OrderService {
             Client c = clientRepository.getByIdClient(dto.getClientId());
             o.setClient(c);
         }else{
-            Client c = new Client();
+            Client c = new Client();        //clientのidがなければ先にclientの保存を行う
             c.setName(dto.getClientName());
             clientRepository.save(c);
             List<Client> clientList = clientRepository.findAll();

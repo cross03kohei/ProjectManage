@@ -37,6 +37,7 @@ public class ProceedsController {
     public String searchProceeds(Model model, @RequestParam("date")String date,
                                  @RequestParam("item")Integer item){
         List<Order> orders = service.search(date,item);
+        model.addAttribute("order",orders);
         model.addAttribute("date",date);
         model.addAttribute("item",CategoryMap.items);
         return "proceeds";
@@ -48,6 +49,10 @@ public class ProceedsController {
         String nowDate = sformat.format(date);
         return nowDate.replace('/','-');
     }
+
+    /**
+     *売上をすべて足す
+     */
     private int allAmount(List<Order> orders){
         int amount = 0;
         for(Order order : orders){
