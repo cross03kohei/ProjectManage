@@ -1,5 +1,6 @@
 package com.cross.jp.projectmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -54,11 +55,16 @@ public class Order {
      * 入金済みのチェック
      */
     @Column(name = "check_payment")
-    private Boolean checkPayment;
+    private Boolean paymentCheck;
 
+    /**
+     * 納品チェック
+     */
+    @Column(name = "check_end")
+    private Boolean endCheck;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    @JsonIgnore
+    @JsonBackReference
     private Client client;
 }

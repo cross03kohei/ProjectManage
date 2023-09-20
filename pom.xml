@@ -52,14 +52,12 @@
 			<artifactId>jquery</artifactId>
 			<version>3.5.1</version>
 		</dependency>
-
 		<!-- bootstrap -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>5.2.2</version>
 		</dependency>
-
 		<!-- webjars-locator -->
 		<dependency>
 			<groupId>org.webjars</groupId>
