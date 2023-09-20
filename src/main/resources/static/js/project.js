@@ -10,9 +10,7 @@ jQuery(function ($) {
             .done(function(data, textStatus, jqXHR){
                 console.log(data[0].name);
                 for(var i = 0; i < data.length; i++){
-                $obj = $("#clientTable").clone();
-                obj.find("#name").text(data[i].name);
-                $("#clientTable").append($obj);
+
                 }
             }).fail(function(jqXHR, textStatus, errorThrown ) {
                           alert("エラーが発生し、データが取得できませんでした");

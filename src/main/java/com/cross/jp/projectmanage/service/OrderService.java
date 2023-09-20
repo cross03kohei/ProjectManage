@@ -23,6 +23,10 @@ public class OrderService {
 
 
     public List<Order> findAll(){ return orderRepository.findAll();}
+
+    /**
+     *現在の日付かつ納品済み（真偽型）のプロジェクトを取得
+     */
     public List<Order> getByMouthProceeds(String date){
         ProjectSpecification spec = new ProjectSpecification();
         return orderRepository.findAll(Specification.where(spec.deliveryDateContains(date).
