@@ -34,7 +34,12 @@ public class OrderService {
     }
     public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
     public List<Order> search(String date,Integer item){
-        return orderRepository.getByMouthOrder(date);
+        ProjectSpecification spec = new ProjectSpecification();
+        if(date.equals("") && item != 10){
+            return orderRepository.findAll(spec.itemContains(item).
+                    and(spec.checkContains(true)));
+        }
+        return orderRepository.findAll(spec.checkContains(true));
     }
 
     public void save(ProjectDto dto){

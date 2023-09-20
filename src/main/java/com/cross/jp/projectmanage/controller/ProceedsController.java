@@ -36,7 +36,7 @@ public class ProceedsController {
     @GetMapping("/search")
     public String searchProceeds(Model model, @RequestParam("date")String date,
                                  @RequestParam("item")Integer item){
-
+        List<Order> orders = service.search(date,item);
         model.addAttribute("date",date);
         model.addAttribute("item",CategoryMap.items);
         return "proceeds";
