@@ -33,13 +33,21 @@ public class OrderService {
                 and(spec.checkContains(true))));
     }
     public Order findById(Integer id){ return orderRepository.getByIdOrder(id);}
-    public List<Order> search(String date,Integer item){
+    public List<Order> search(String date,Integer item){    //item = 10 すべての商品のキー
         ProjectSpecification spec = new ProjectSpecification();
-        if(date.equals("") && item != 10){
+        if(date.equals("") && item != 10){  //dateが空で商品が選択されている場合
             return orderRepository.findAll(spec.itemContains(item).
                     and(spec.checkContains(true)));
         }
-        return orderRepository.findAll(spec.checkContains(true));
+        if(!date.equals("") && item == 10){     //日付があり、商品が選択されていない場合
+            return orderRepository.findAll(spec.deliveryDateContains(date).
+                    and(spec.checkContains(true)));
+        }
+        if(!date.equals("")){       //どちらとも選択済み
+            return orderRepository.findAll(spec.deliveryDateContains(date).
+                    and(spec.itemContains(item).and(spec.checkContains(true))));
+        }
+        return orderRepository.findAll(spec.checkContains(true));   //何も選択されていない場合
     }
 
     public void save(ProjectDto dto){
