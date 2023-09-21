@@ -44,7 +44,7 @@ public class ClientController {
                              @RequestParam("name")String name,@RequestParam("post_code")String postCode,
                              @RequestParam("address")String address,@RequestParam("phone")String telephoneNumber,
                              @RequestParam("fax")String fax,@RequestParam("note")String note){
-        service.save(createDto(id,name,postCode,address,telephoneNumber,fax,note));
+        service.edit(create(id,name,postCode,address,telephoneNumber,fax,note));
         return "redirect:/client/{id}";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -58,10 +58,9 @@ public class ClientController {
         service.delete(client);
         return "redirect:/client/list";
     }
-    private ClientDto createDto(Integer id,String name, String postCode, String address,
+    private Client create(Integer id,String name, String postCode, String address,
                                 String telephoneNumber, String fax,String note){
-        ClientDto c = new ClientDto();
-        c.setId(id);
+        Client c = service.getClient(id);
         c.setName(name);
         c.setPostCode(postCode);
         c.setAddress(address);

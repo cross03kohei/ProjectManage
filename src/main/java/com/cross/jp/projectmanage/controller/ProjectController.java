@@ -75,7 +75,7 @@ public class ProjectController {
                               @RequestParam("progress")Integer progress,
                               @RequestParam("endCheck")Boolean endCheck){
         Order o = service.findById(id);
-        if(progress == 2 && endCheck){
+        if(progress == 2 && endCheck != null && endCheck){
             o.setEndCheck(true);
         }else{
             o.setProgress(progress);
