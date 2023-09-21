@@ -12,4 +12,5 @@ public class ProjectJson {
     private Integer quantity;
     private Integer amount;
     private Integer manager;
+    private Integer progress;
 }

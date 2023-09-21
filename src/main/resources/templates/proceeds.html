@@ -3,16 +3,17 @@
 <head th:replace="head :: head(title = '売上管理',scripts = ~{}, links = ~{})">
 </head>
 <body>
-    <h3 th:text="${date}"></h3>
+    <h4 th:text="${date}"></h4>
+    <h4 th:text="${item.get(itemCategory)}"></h4>
     <h3>売上管理</h3>
     <div class="search">
         <form th:action="@{/proceeds/search}">
             <label>日付</label>
-            <input type="month" name="date">
+            <input type="month" name="date" th:value="${date}">
             <label>商品</label>
             <select name="item">
                 <option value="10">すべて</option>
-                <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 10}"></option>
+                <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == itemCategory}"></option>
             </select>
             <input type="submit" value="選択">
         </form>

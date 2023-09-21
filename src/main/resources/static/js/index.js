@@ -18,6 +18,7 @@ jQuery(function ($) {
                     $("#manager").val(data.manager);
                     $("#quantity").val(data.quantity);
                     $("#amount").val(data.amount);
+                    $("#progress").val(data.progress);
 
                     $("#endId").val(data.id);
                     $("endProgress").val(data.progress);

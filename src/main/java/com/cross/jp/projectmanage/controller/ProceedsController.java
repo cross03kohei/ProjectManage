@@ -39,9 +39,15 @@ public class ProceedsController {
         List<Order> orders = service.search(date,item);
         model.addAttribute("order",orders);
         model.addAttribute("date",date);
+        model.addAttribute("itemCategory",item);
+        model.addAttribute("allAmount",allAmount(orders));
         model.addAttribute("item",CategoryMap.items);
         return "proceeds";
     }
+
+    /**
+     *現在日時を文字列で習得（例 2022-02)
+     */
     private String nowDate(){
         Calendar calendar = Calendar.getInstance(); //現在日時を取得
         Date date = calendar.getTime();
@@ -51,7 +57,7 @@ public class ProceedsController {
     }
 
     /**
-     *売上をすべて足す
+     *売上をすべて足して返す
      */
     private int allAmount(List<Order> orders){
         int amount = 0;

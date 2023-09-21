@@ -43,6 +43,9 @@ public class ProjectController {
                 ingProject.add(project);
             }
             if (project.getProgress() == 2) {
+                if(project.getEndCheck()){
+                    continue;
+                }
                 endProject.add(project);
             }
         }
@@ -122,6 +125,7 @@ public class ProjectController {
         json.setQuantity(o.getQuantity());
         json.setAmount(o.getAmount());
         json.setManager(o.getManager());
+        json.setProgress(o.getProgress());
         return json;
     }
     private Order createProject(Integer id,Integer item,Integer quantity,
