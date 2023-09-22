@@ -1,5 +1,6 @@
 jQuery(function ($) {
     $("#search_button").click(function () {
+    $("#clientTable tbody tr").not(":first").empty(); //最初の要素以外を削除する
     $.ajax({
                 url:"json",
                 type: "POST",
