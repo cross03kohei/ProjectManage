@@ -1,6 +1,4 @@
 jQuery(function ($) {
-
-    $(".clientTr").empty();
     $("#search_button").click(function () {
     $.ajax({
                 url:"json",
@@ -11,13 +9,18 @@ jQuery(function ($) {
             })
             .done(function(data, textStatus, jqXHR){
                 for(var i = 0; i < data.length; i++){
-                   $obj = $(".clientTr").clone();
-                   $obj.find(".clientName").text(data[i].name);
-                   $obj.find(".btn").val(data[i].id)
-                   $("#clientTbody").appendTo($obj);
+                   $tr = $("#clientTable tbody tr:first-child").clone(true)
+                   $tr.find(".clientName").text(data[i].name);
+                   $tr.find(".btn").val(data[i].id);
+                   $tr.appendTo("#clientTable tbody");
+                   $("#clientTable tbody tr:last-child").css("display", "table-row");
                 }
             }).fail(function(jqXHR, textStatus, errorThrown ) {
                           alert("エラーが発生し、データが取得できませんでした");
             });
     });
+    $(".decision").click(function () {
+        $("#clientId").val($(this).val());
+        $("#cancel").trigger("click");
+    })
 });

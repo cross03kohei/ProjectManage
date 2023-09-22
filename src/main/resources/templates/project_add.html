@@ -11,7 +11,7 @@
                 <button id="searchButton" data-bs-toggle="modal" data-bs-target="#clientSearch" type="button" class="btn btn-primary">
                     検索
                 </button>
-                <input type="text" th:field="*{clientId}">
+                <input type="text" id="clientId" th:field="*{clientId}">
                 <input type="text" th:field="*{clientName}">
             </div>
             <div class="item">
@@ -66,7 +66,7 @@
                     <form>
                         <input type="text" name="name" id="client_text">
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel">キャンセル</button>
                             <input type="button" id="search_button" class="btn btn-primary" value="検索">
                         </div>
                     </form>
@@ -78,9 +78,9 @@
                         </tr>
                         </thead>
                         <tbody id="clientTbody">
-                        <tr class="clientTr">
+                        <tr class="clientTr" style="display: none;">
                             <td class="clientName"></td>
-                            <td><input class="btn" type="button" value="決定" > </td>
+                            <td><button class="btn btn-secondary decision">決定</button> </td>
                         </tr>
                         </tbody>
                     </table>
