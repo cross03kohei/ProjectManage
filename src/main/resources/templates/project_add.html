@@ -12,7 +12,11 @@
                     検索
                 </button>
                 <input type="text" id="clientId" th:field="*{clientId}">
-                <input type="text" th:field="*{clientName}">
+                <h4 id="clientName"></h4>
+                <h5>新たに顧客を追加</h5>
+                <button class="btn btn-primary plusClient" type="button">＋</button>
+                <input id="clientNewName" type="hidden" th:field="*{clientName}">
+                <button  id="-btn" class="btn btn-danger" type="button" style="display: none;">-</button>
             </div>
             <div class="item">
                 <label>商品名</label>

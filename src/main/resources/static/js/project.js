@@ -22,6 +22,22 @@ jQuery(function ($) {
     });
     $(".decision").click(function () {
         $("#clientId").val($(this).val());
+        var name = $(this).parent().prev().text();
+        $("#clientName").text("顧客名：" + name);
         $("#cancel").trigger("click");
+    })
+    $(".plusClient").click(function () {
+        if($("#clientId").val() == ""){
+            $("#clientNewName").get(0).type = "text";
+            $("#-btn").css("display","block");
+        }else{
+            alert("顧客は選択済みだよ");
+        }
+
+    })
+    $("#-btn").click(function () {
+        $("#clientNewName").get(0).type = "hidden";
+        $("#clientNewName").val("");
+        $("#-btn").css("display","none");
     })
 });
