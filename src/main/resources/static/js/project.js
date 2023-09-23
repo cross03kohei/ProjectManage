@@ -33,7 +33,11 @@ jQuery(function ($) {
         }else{
             alert("顧客は選択済みだよ");
         }
-
+    });
+    $("#searchButton").click(function () {
+        if($("#clientNewName").val() != ""){
+            alert("顧客名を入力してるよ");
+        }
     })
     $("#-btn").click(function () {
         $("#clientNewName").get(0).type = "hidden";

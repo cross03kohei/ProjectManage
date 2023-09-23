@@ -23,6 +23,12 @@ jQuery(function ($) {
                     $("#endId").val(data.id);
                     $("endProgress").val(data.progress);
                 })
-
+    $("#endBtn").submit(function () {
+        if($("endProgress").val() != "2" && $("#endCheck") == "true"){
+            return false;
+            alert("進行状態が完了じゃないと納品済みにできないよ");
+        }
     });
+    });
+
 });

@@ -154,13 +154,13 @@
                                 th:text="${progress.value}" selected></option>
                     </select>
                     <label>納品済み</label>
-                    <select name="endCheck">
+                    <select name="endCheck" id="endCheck">
                         <option value="false" selected>未納品</option>
                         <option value="true">納品済み</option>
                     </select>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                        <input type="submit" class="btn btn-primary" value="決定">
+                        <button id="endBtn" type="submit" class="btn btn-primary">決定</button>
                     </div>
                 </form>
             </div>
