@@ -26,7 +26,7 @@ public class ProjectController {
     @Autowired
     OrderService service;
 
-    @GetMapping("/list")
+    @GetMapping
     public String projectList(Model model){
         List<Order> noProject = new ArrayList<>();
         List<Order> ingProject = new ArrayList<>();

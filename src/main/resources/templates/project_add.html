@@ -3,6 +3,7 @@
 <head th:replace="head :: head(title = 'プロジェクト登録',scripts = ~{}, links = ~{})">
 </head>
 <body>
+    <div th:replace="header :: header"></div>
     <h3>プロジェクト情報登録</h3>
     <div class="project_form">
         <form th:action="@{/project/save}" th:object="${projectDto}" method="post">
@@ -11,7 +12,7 @@
                 <button id="searchButton" data-bs-toggle="modal" data-bs-target="#clientSearch" type="button" class="btn btn-primary">
                     検索
                 </button>
-                <input type="text" id="clientId" th:field="*{clientId}">
+                <input type="hidden" id="clientId" th:field="*{clientId}">
                 <h4 id="clientName"></h4>
                 <h5>新たに顧客を追加</h5>
                 <button class="btn btn-primary plusClient" type="button">＋</button>

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>顧客一覧</title>
-</head>
+<head th:replace="head :: head(title = '顧客一覧',scripts = ~{}, links = ~{})"></head>
 <body>
+    <div th:replace="header :: header"></div>
     <h3>顧客一覧</h3>
     <form th:action="@{/client/search}">
         <input type="text" name="name">

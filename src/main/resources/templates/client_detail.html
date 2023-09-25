@@ -3,6 +3,7 @@
 <head th:replace="head :: head(title = '顧客詳細',scripts = ~{}, links = ~{})"></head>
 <link rel="stylesheet" th:href="@{/css/client.css}">
 <body>
+    <div th:replace="header :: header"></div>
     <div class="client_detail">
         <h3>[[${client.name}]]</h3>
         <p>電話番号</p>

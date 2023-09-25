@@ -3,6 +3,7 @@
 <head th:replace="head :: head(title = '売上管理',scripts = ~{}, links = ~{})">
 </head>
 <body>
+    <div th:replace="header :: header"></div>
     <h4 th:text="${date}"></h4>
     <h4 th:text="${item.get(itemCategory)}"></h4>
     <h3>売上管理</h3>
