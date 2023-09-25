@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class ProjectSpecification {
     public Specification<Order> deliveryDateContains(String date){
         return date == null ? null : (root, query, criteriaBuilder) -> {
+            query.orderBy(criteriaBuilder.asc(root.get("deliveryDate"))); //昇順で取り出す　order by asc deliveryDate
             return criteriaBuilder.like(root.get("deliveryDate"), date + "%");
         };
     }

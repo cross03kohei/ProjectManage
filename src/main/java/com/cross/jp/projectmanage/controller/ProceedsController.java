@@ -37,6 +37,7 @@ public class ProceedsController {
     public String searchProceeds(Model model, @RequestParam("date")String date,
                                  @RequestParam("item")Integer item){
         List<Order> orders = service.search(date,item);
+
         model.addAttribute("order",orders);
         model.addAttribute("date",date);
         model.addAttribute("itemCategory",item);
