@@ -25,6 +25,7 @@ jQuery(function ($) {
         var name = $(this).parent().prev().text();
         $("#clientName").text("顧客名：" + name);
         $("#cancel").trigger("click");
+        $(".newClient").text("");
     })
     $(".plusClient").click(function () {
         if($("#clientId").val() == ""){
