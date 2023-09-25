@@ -19,7 +19,7 @@
         </form>
     </div>
     <div class="proceeds_table">
-        <table>
+        <table class="table table-dark table-striped-columns">
             <thead>
                 <tr>
                     <th>納品日</th>
@@ -35,10 +35,13 @@
                     <td th:text="${item.get(order.itemCategory)}"></td>
                     <td th:text="${order.amount}"></td>
                 </tr>
+                <tr>
+                    <td><p>合計</p></td><td></td><td></td>
+                    <td><p th:text="${allAmount}"></p></td>
+                </tr>
             </tbody>
         </table>
     </div>
-    <h5>合計</h5><p th:text="${allAmount}"></p>
     <div class="button_csv">
         <button id="csv_btn">CSVに出力</button>
         <a style="display: none" id="downloader" href="#"></a>

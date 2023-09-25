@@ -16,6 +16,7 @@
                 <th>商品名</th>
                 <th>担当スタッフ</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
             <td>
                 <button th:value="${no.id}" id="edit_button" data-bs-toggle="modal" data-bs-target="#projectEdit"type="button" class="btn btn-primary">
                     編集
+                </button>
+            </td>
+            <td>
+                <button th:value="${no.id}" data-bs-toggle="modal" data-bs-target="#projectDelete" type="button" class="btn btn-danger">
+                    削除
                 </button>
             </td>
         </tr>
@@ -43,6 +49,7 @@
                 <th>商品名</th>
                 <th>担当スタッフ</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -54,6 +61,11 @@
                 <td>
                     <button th:value="${ing.id}" id="ing_button" data-bs-toggle="modal" data-bs-target="#projectEdit"type="button" class="btn btn-primary">
                         編集
+                    </button>
+                </td>
+                <td>
+                    <button th:value="${ing.id}" data-bs-toggle="modal" data-bs-target="#projectDelete" type="button" class="btn btn-danger">
+                        削除
                     </button>
                 </td>
             </tr>
@@ -70,6 +82,7 @@
                 <th>商品名</th>
                 <th>担当スタッフ</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -81,6 +94,11 @@
                 <td>
                     <button th:value="${end.id}" id="end_button" data-bs-toggle="modal" data-bs-target="#projectEditEnd" type="button" class="btn btn-primary">
                         編集
+                    </button>
+                </td>
+                <td>
+                    <button th:value="${end.id}" data-bs-toggle="modal" data-bs-target="#projectDelete" type="button" class="btn btn-danger">
+                        削除
                     </button>
                 </td>
             </tr>
@@ -165,6 +183,26 @@
                 </form>
             </div>
 
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="projectDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ModalLabelDelete">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/project/delete}">
+                    <input type="hidden" id="deleteId" name="id">
+                    <p>削除しますか</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                        <input type="submit" class="btn btn-primary" value="決定">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

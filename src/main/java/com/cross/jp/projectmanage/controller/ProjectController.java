@@ -91,6 +91,11 @@ public class ProjectController {
         service.save(dto);
         return "redirect:/project/list";
     }
+    @RequestMapping(value = "/delete")
+    public String deleteProject(@RequestParam("id")Integer id){
+        service.delete(service.findById(id));
+        return "redirect:/project/list";
+    }
     @PostMapping(value = "json")
     @ResponseBody
     public String getJsonData(SearchForm form){

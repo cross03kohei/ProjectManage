@@ -21,7 +21,8 @@ jQuery(function ($) {
                     $("#progress").val(data.progress);
 
                     $("#endId").val(data.id);
-                    $("endProgress").val(data.progress);
+                    $("#endProgress").val(data.progress);
+                    $("#deleteId").val(data.id);
                 })
     $("#endBtn").submit(function () {
         if($("endProgress").val() != "2" && $("#endCheck") == "true"){
