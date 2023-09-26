@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.management.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,6 @@ public class OrderService {
         }
         return orderRepository.findAll(spec.checkContains(true));   //何も選択されていない場合
     }
-
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));
     }
