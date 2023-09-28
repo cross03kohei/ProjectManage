@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -95,7 +96,7 @@ public class ProjectController {
         return "project_add";
     }
     @PostMapping(value = "/save")
-    public String saveProject(@ModelAttribute ProjectDto dto,
+    public String saveProject(@ModelAttribute @Validated ProjectDto dto,
                               BindingResult bindingResult,Model model){
         if(bindingResult.hasErrors()){
             return addProject(model,dto);
