@@ -13,4 +13,5 @@ public class ProjectJson {
     private Integer amount;
     private Integer manager;
     private Integer progress;
+    private String deliveryDate;
 }

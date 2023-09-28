@@ -1,63 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="head :: head(title = 'プロジェクト登録',scripts = ~{}, links = ~{})">
+    <link th:href="@{/css/project_add.css}" rel="stylesheet">
 </head>
 <body>
     <div th:replace="header :: header"></div>
     <h3>プロジェクト情報登録</h3>
     <div class="project_form">
         <form th:action="@{/project/save}" th:object="${projectDto}" method="post">
-            <div class="client_name">
-                <label>顧客名</label>
-                <button id="searchButton" data-bs-toggle="modal" data-bs-target="#clientSearch" type="button" class="btn btn-primary">
-                    検索
-                </button>
-                <input type="hidden" id="clientId" th:field="*{clientId}">
-                <h4 id="clientName"></h4>
-                <h5 class="newClient">新たに顧客を追加</h5>
-                <button class="btn btn-primary plusClient" type="button">＋</button>
-                <input id="clientNewName" type="hidden" th:field="*{clientName}">
-                <button  id="-btn" class="btn btn-danger" type="button" style="display: none;">-</button>
-            </div>
-            <div class="item">
-                <label>商品名</label>
-                <select th:field="*{item}">
-                    <option th:each="item : ${items}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 0}"></option>
-                </select>
-            </div>
-            <div class="quantity">
-                <label>数量</label>
-                <input type="text" th:field="*{quantity}">
-            </div>
-            <div class="amount">
-                <label>金額</label>
-                <input type="text" th:field="*{amount}">
-            </div>
-            <div class="manager">
-                <label>担当者</label>
-                <select name="manager" th:field="*{manager}">
-                   <option th:each="manager : ${managers}" th:value="${manager.key}"
-                           th:text="${manager.value}" th:selected="${manager.key == 0}"></option>
-                </select>
-            </div>
-            <div class="reception_date">
-                <label>受付日</label>
-                <input type="date" th:field="*{receptionDate}">
-            </div>
-            <div class="progress">
-                <label>状況</label>
-                <select name="progress" th:field="*{progress}">
-                    <option th:each="progress : ${progress}" th:value="${progress.key}"
-                            th:text="${progress.value}" th:selected="${progress.key == 0}"></option>
-                </select>
-            </div>
-            <div class="delivery_date">
-                <label>納品日</label>
-                <input type="date" th:field="*{deliveryDate}">
-            </div>
-            <div class="submit">
-                <input type="submit" value="登録">
-            </div>
+
+            <table class="table table-bordered table-hover" style="width: 600px">
+                <tr>
+                    <th class="active col-sm-3">顧客名</th>
+                    <td>
+                        <div class="form-group">
+                            <button id="searchButton" data-bs-toggle="modal" data-bs-target="#clientSearch" type="button" class="btn btn-primary">
+                                検索
+                            </button>
+                            <input type="hidden" id="clientId" th:field="*{clientId}">
+                            <h4 id="clientName"></h4>
+                            <h5 class="newClient">新たに顧客を追加</h5>
+                            <button class="btn btn-primary plusClient" type="button">＋</button>
+                            <input id="clientNewName" type="hidden" th:field="*{clientName}">
+                            <button  id="-btn" class="btn btn-danger" type="button" style="display: none;">-</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">商品名</th>
+                        <td>
+                        <div class="form-group">
+
+                        <select th:field="*{item}" class="form-select form-select-lg mb-3" aria-label="Default select example">
+                            <option th:each="item : ${items}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 0}"></option>
+                        </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">数量</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" th:field="*{quantity}" class="form-control">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">金額</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" th:field="*{amount}" class="form-control">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">担当者</th>
+                    <td>
+                        <div class="form-group">
+                            <select name="manager" th:field="*{manager}" class="form-select form-select-lg mb-3" aria-label="Default select example">
+                                <option th:each="manager : ${managers}" th:value="${manager.key}"
+                                        th:text="${manager.value}" th:selected="${manager.key == 0}"></option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">受付日</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="date" th:value="${nowDate}" class="form-control" name="receptionDate">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">進歩状況</th>
+                    <td>
+                        <div class="form-group">
+                            <select name="progress" th:field="*{progress}" class="form-select form-select-lg mb-3" aria-label="Default select example">
+                                <option th:each="progress : ${progress}" th:value="${progress.key}"
+                                        th:text="${progress.value}" th:selected="${progress.key == 0}"></option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">納品日</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="date" th:field="*{deliveryDate}" class="form-control">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <ul>
+                <li th:each="error : ${#fields.detailedErrors()}">
+                    <span th:text="${error.message}">Error message</span>
+                </li>
+            </ul>
+            <button class="btn btn-primary" type="submit">登録</button>
         </form>
     </div>
     <div class="modal fade" id="clientSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

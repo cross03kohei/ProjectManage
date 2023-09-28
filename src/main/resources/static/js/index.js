@@ -23,6 +23,7 @@ jQuery(function ($) {
                     $("#endId").val(data.id);
                     $("#endProgress").val(data.progress);
                     $("#deleteId").val(data.id);
+                    $("#endDeliveryDate").val(data.deliveryDate);
                 })
     $("#endBtn").submit(function () {
         if($("endProgress").val() != "2" && $("#endCheck") == "true"){

@@ -13,9 +13,13 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,7 +30,7 @@ public class ProjectController {
     @Autowired
     OrderService service;
 
-    @GetMapping
+    @GetMapping("/list")
     public String projectList(Model model){
         List<Order> noProject = new ArrayList<>();
         List<Order> ingProject = new ArrayList<>();
@@ -58,14 +62,7 @@ public class ProjectController {
         return "index";
     }
 
-    @GetMapping("/add")
-    public String addProject(Model model){
-        model.addAttribute("projectDto",new ProjectDto());
-        model.addAttribute("items",CategoryMap.items);
-        model.addAttribute("managers",CategoryMap.manager);
-        model.addAttribute("progress",CategoryMap.progress);
-        return "project_add";
-    }
+
     @GetMapping("/progress")
     public String editProject(@RequestParam("id")Integer id,@RequestParam("item")Integer item,
                               @RequestParam("quantity")Integer quantity,@RequestParam("amount")Integer amount,
@@ -76,18 +73,34 @@ public class ProjectController {
     @GetMapping("/check")
     public String checkProject(@RequestParam("id")Integer id,
                               @RequestParam("progress")Integer progress,
-                              @RequestParam("endCheck")Boolean endCheck){
+                              @RequestParam("endCheck")Boolean endCheck,
+                               @RequestParam("deliveryDate")String date){
         Order o = service.findById(id);
         if(progress == 2 && endCheck != null && endCheck){
             o.setEndCheck(true);
+            o.setDeliveryDate(date);
         }else{
             o.setProgress(progress);
+            o.setDeliveryDate(date);
         }
         service.edit(o);
         return "redirect:/project/list";
     }
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProject(@ModelAttribute ProjectDto dto){
+    @GetMapping("/add")
+    public String addProject(Model model,@ModelAttribute ProjectDto projectDto){
+        model.addAttribute("items",CategoryMap.items);
+        model.addAttribute("managers",CategoryMap.manager);
+        model.addAttribute("progress",CategoryMap.progress);
+        model.addAttribute("nowDate",nowDate());
+        return "project_add";
+    }
+    @PostMapping(value = "/save")
+    public String saveProject(@ModelAttribute ProjectDto dto,
+                              BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()){
+            return addProject(model,dto);
+        }
+        dto.setReceptionDate(nowDate());
         service.save(dto);
         return "redirect:/project/list";
     }
@@ -131,6 +144,7 @@ public class ProjectController {
         json.setAmount(o.getAmount());
         json.setManager(o.getManager());
         json.setProgress(o.getProgress());
+        json.setDeliveryDate(o.getDeliveryDate());
         return json;
     }
     private Order createProject(Integer id,Integer item,Integer quantity,
@@ -142,6 +156,17 @@ public class ProjectController {
         o.setManager(manager);
         o.setProgress(progress);
         return o;
+    }
+
+    /**
+     *現在日時を所得 受付日に値を持たせるためにつかう
+     */
+    private String nowDate(){
+        Calendar calendar = Calendar.getInstance(); //現在日時を取得
+        Date date = calendar.getTime();
+        SimpleDateFormat sformat = new SimpleDateFormat("yyyy/MM/dd");
+        String nowDate = sformat.format(date);
+        return nowDate.replace('/','-');
     }
 
 }

@@ -47,7 +47,7 @@ public class ClientController {
         service.edit(create(id,name,postCode,address,telephoneNumber,fax,note));
         return "redirect:/client/{id}";
     }
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+
     public String saveClient(@ModelAttribute ClientDto clientDto, Model model){
         service.save(clientDto);
         return "redirect:/client/list";

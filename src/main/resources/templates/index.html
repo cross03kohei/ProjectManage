@@ -105,7 +105,6 @@
             </tbody>
         </table>
     </div>
-
 <div class="modal fade" id="projectEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -166,16 +165,38 @@
             <div class="modal-body">
                 <form th:action="@{/project/check}">
                     <input type="hidden" name="id" id="endId">
-                    <label>進行状況</label>
-                    <select name="progress" id="endProgress">
-                        <option th:each="progress : ${progress}" th:value="${progress.key}"
-                                th:text="${progress.value}" selected></option>
-                    </select>
-                    <label>納品済み</label>
-                    <select name="endCheck" id="endCheck">
-                        <option value="false" selected>未納品</option>
-                        <option value="true">納品済み</option>
-                    </select>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th class="active">進歩状況</th>
+                            <td>
+                                <div class="form-group">
+                                    <select name="progress" id="endProgress">
+                                        <option th:each="progress : ${progress}" th:value="${progress.key}"
+                                                th:text="${progress.value}" selected></option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="active"></th>
+                            <td>
+                                <div class="form-group">
+                                    <select name="endCheck" id="endCheck">
+                                        <option value="false" selected>未納品</option>
+                                        <option value="true">納品済み</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="active">納品日</th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="deliveryDate" id="endDeliveryDate">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         <button id="endBtn" type="submit" class="btn btn-primary">決定</button>
