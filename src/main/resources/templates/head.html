@@ -6,7 +6,7 @@
     <!-- JS読み込み -->
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+    <link rel="stylesheet" th:href="@{/css/header.css}">
     <!-- 各画面専用のscript,cssを定義します -->
     <th:block th:replace="${links}" />
     <th:block th:replace="${scripts}" />

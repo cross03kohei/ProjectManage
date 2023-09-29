@@ -40,16 +40,22 @@
                 <tr>
                     <th class="active">数量</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('quantity')} ? 'has-error'">
                             <input type="text" th:field="*{quantity}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">
+                                quantity error
+                            </span>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <th class="active">金額</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('amount')} ? 'has-error'">
                             <input type="text" th:field="*{amount}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+                                amount error
+                            </span>
                         </div>
                     </td>
                 </tr>

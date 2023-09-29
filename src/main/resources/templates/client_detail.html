@@ -4,27 +4,42 @@
 <link rel="stylesheet" th:href="@{/css/client.css}">
 <body>
     <div th:replace="header :: header"></div>
-    <div class="client_detail">
-        <h3>[[${client.name}]]</h3>
-        <p>電話番号</p>
-        <p th:text="${client.telephoneNumber}"></p>
-        <p>FAX</p>
-        <p th:text="${client.fax}"></p>
-        <p>住所</p>
-        <p th:text="${client.postCode}"></p>
-        <p th:text="${client.address}"></p>
-        <p>備考</p>
-        <p th:text="${client.note}"></p>
-    </div>
+    <table class="table table-bordered table-hover" style="width: 500px">
+        <tr>
+            <th class="active" style="width: 150px">顧客名</th>
+            <td th:text="${client.name}"></td>
+        </tr>
+        <tr>
+            <th class="active">電話番号</th>
+            <td th:text="${client.telephoneNumber}"></td>
+        </tr>
+        <tr>
+            <th class="active">FAX</th>
+            <td th:text="${client.fax}"></td>
+        </tr>
+        <tr>
+            <th class="active">郵便番号</th>
+            <td th:text="${client.postCode}"></td>
+        </tr>
+        <tr>
+            <th class="active">住所</th>
+            <td th:text="${client.address}"></td>
+        </tr>
+        <tr>
+            <th class="active">備考</th>
+            <td th:text="${client.note}"></td>
+        </tr>
+    </table>
     <div class="client_button">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
             編集
         </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
             削除
         </button>
-
     </div>
+    </div>
+
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

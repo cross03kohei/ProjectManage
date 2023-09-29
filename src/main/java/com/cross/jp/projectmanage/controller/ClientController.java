@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +37,17 @@ public class ClientController {
         return "client_detail";
     }
     @GetMapping("/add")
-    public String addClient(Model model){
-        model.addAttribute("clientDto", new ClientDto());
+    public String addClient(Model model,@ModelAttribute ClientDto clientDto){
         return "client_add";
+    }
+    @PostMapping("/save")
+    public String saveClient(Model model, @ModelAttribute @Validated ClientDto clientDto,
+                             BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return addClient(model,clientDto);
+        }
+        service.save(clientDto);
+        return "redirect:/client/list";
     }
     @GetMapping("/edit/{id}")
     public String editClient(Model model,@PathVariable("id")Integer id,
@@ -48,10 +58,7 @@ public class ClientController {
         return "redirect:/client/{id}";
     }
 
-    public String saveClient(@ModelAttribute ClientDto clientDto, Model model){
-        service.save(clientDto);
-        return "redirect:/client/list";
-    }
+
     @GetMapping("/delete/{id}")
     public String deleteClient(@PathVariable("id")Integer id){
         Client client = service.getClient(id);

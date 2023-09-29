@@ -6,11 +6,15 @@
 </head>
 <body>
     <header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
-        <a th:href="@{/project/add}">プロジェクト登録</a>
-        <a th:href="@{/client/add}">顧客登録</a>
-        <a th:href="@{/proceeds/list}">売上管理</a>
-        <a th:href="@{/client/list}">顧客リスト</a>
-        <a th:href="@{/project}">ホーム</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/project/add}">プロジェクト登録</a></li>
+                <li><a th:href="@{/client/add}">顧客登録</a></li>
+                <li><a th:href="@{/proceeds/list}">売上管理</a></li>
+                <li><a th:href="@{/client/list}">顧客リスト</a></li>
+                <li><a th:href="@{/project/list}">ホーム</a></li>
+            </ul>
+        </nav>
     </header>
 </body>
 </html>
