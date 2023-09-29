@@ -74,7 +74,7 @@
                     <th class="active">受付日</th>
                     <td>
                         <div class="form-group">
-                            <input type="date" th:value="${nowDate}" class="form-control" name="receptionDate">
+                            <input type="date" class="form-control" name="receptionDate" th:field="*{receptionDate}">
                         </div>
                     </td>
                 </tr>

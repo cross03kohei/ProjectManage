@@ -5,6 +5,10 @@
 <body>
 <!--    ヘッダーの呼び出し-->
     <div th:replace="header :: header"></div>
+    <p th:text="${validation}" id="event-validation" style="display: none"></p>
+    <button id="event_button" data-bs-toggle="modal" data-bs-target="#projectEditEnd" type="button" class="btn btn-primary" style="display: none">
+    バリデーション用
+</button>
     <h2>プロジェクト管理</h2>
     <div class="not_project_table">
         <h3>未着手のプロジェクト</h3>
@@ -163,14 +167,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/project/check}">
-                    <input type="hidden" name="id" id="endId">
+                <form th:action="@{/project/check}" th:object="${endCheckDto}" method="post">
+                    <input type="hidden" id="endId" th:field="*{id}">
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th class="active">進歩状況</th>
                             <td>
                                 <div class="form-group">
-                                    <select name="progress" id="endProgress">
+                                    <select id="endProgress" th:field="*{progress}">
                                         <option th:each="progress : ${progress}" th:value="${progress.key}"
                                                 th:text="${progress.value}" selected></option>
                                     </select>
@@ -181,7 +185,7 @@
                             <th class="active"></th>
                             <td>
                                 <div class="form-group">
-                                    <select name="endCheck" id="endCheck">
+                                    <select id="endCheck" th:field="*{endCheck}">
                                         <option value="false" selected>未納品</option>
                                         <option value="true">納品済み</option>
                                     </select>
@@ -192,11 +196,16 @@
                             <th class="active">納品日</th>
                             <td>
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="deliveryDate" id="endDeliveryDate">
+                                    <input type="date" class="form-control" id="endDeliveryDate" th:field="*{date}">
                                 </div>
                             </td>
                         </tr>
                     </table>
+                    <ul>
+                        <li th:each="error : ${#fields.detailedErrors()}">
+                            <span th:text="${error.message}">Error message</span>
+                        </li>
+                    </ul>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         <button id="endBtn" type="submit" class="btn btn-primary">決定</button>

@@ -1,6 +1,7 @@
 package com.cross.jp.projectmanage.controller;
 
 import com.cross.jp.projectmanage.CategoryMap;
+import com.cross.jp.projectmanage.dto.EndCheckDto;
 import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
 import com.cross.jp.projectmanage.entity.Order;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class ProjectController {
     OrderService service;
 
     @GetMapping("/list")
-    public String projectList(Model model){
+    public String projectList(Model model, @ModelAttribute EndCheckDto endCheckDto){
         List<Order> noProject = new ArrayList<>();
         List<Order> ingProject = new ArrayList<>();
         List<Order> endProject = new ArrayList<>();
@@ -71,28 +73,24 @@ public class ProjectController {
         service.edit(createProject(id,item,quantity,amount,manager,progress));
         return "redirect:/project/list";
     }
-    @GetMapping("/check")
-    public String checkProject(@RequestParam("id")Integer id,
-                              @RequestParam("progress")Integer progress,
-                              @RequestParam("endCheck")Boolean endCheck,
-                               @RequestParam("deliveryDate")String date){
-        Order o = service.findById(id);
-        if(progress == 2 && endCheck != null && endCheck){
-            o.setEndCheck(true);
-            o.setDeliveryDate(date);
-        }else{
-            o.setProgress(progress);
-            o.setDeliveryDate(date);
+    @PostMapping("/check")
+    public String checkProject(Model model,@ModelAttribute @Validated EndCheckDto dto,
+                               BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return projectList(model,dto);
         }
+        Order o = service.findById(dto.getId());
+        o.setDeliveryDate(dto.getDate());
+        o.setEndCheck(dto.getEndCheck());
         service.edit(o);
         return "redirect:/project/list";
     }
     @GetMapping("/add")
     public String addProject(Model model,@ModelAttribute ProjectDto projectDto){
+        projectDto.setReceptionDate(nowDate());
         model.addAttribute("items",CategoryMap.items);
         model.addAttribute("managers",CategoryMap.manager);
         model.addAttribute("progress",CategoryMap.progress);
-        model.addAttribute("nowDate",nowDate());
         return "project_add";
     }
     @PostMapping(value = "/save")
