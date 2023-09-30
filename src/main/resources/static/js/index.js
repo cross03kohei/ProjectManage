@@ -13,7 +13,7 @@ jQuery(function ($) {
                 })
                 .done(function(data) {
                     $("#id").val(data.id);
-                    $("#name").text("顧客名：" + data.name);
+                    $("#name").text(data.name);
                     $("#item").val(data.item);
                     $("#manager").val(data.manager);
                     $("#quantity").val(data.quantity);

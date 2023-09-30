@@ -50,6 +50,7 @@ public class OrderService {
         }
         return orderRepository.findAll(spec.checkContains(true));   //何も選択されていない場合
     }
+    public void saveProgress(Order o) { orderRepository.save(o);}
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));
     }

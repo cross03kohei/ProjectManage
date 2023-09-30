@@ -2,6 +2,7 @@ package com.cross.jp.projectmanage.controller;
 
 import com.cross.jp.projectmanage.CategoryMap;
 import com.cross.jp.projectmanage.dto.EndCheckDto;
+import com.cross.jp.projectmanage.dto.ProgressDto;
 import com.cross.jp.projectmanage.dto.ProjectDto;
 import com.cross.jp.projectmanage.entity.Client;
 import com.cross.jp.projectmanage.entity.Order;
@@ -34,7 +35,8 @@ public class ProjectController {
     OrderService service;
 
     @GetMapping("/list")
-    public String projectList(Model model, @ModelAttribute EndCheckDto endCheckDto){
+    public String projectList(Model model, @ModelAttribute EndCheckDto endCheckDto,
+                              @ModelAttribute ProgressDto progressDto){
         List<Order> noProject = new ArrayList<>();
         List<Order> ingProject = new ArrayList<>();
         List<Order> endProject = new ArrayList<>();
@@ -67,21 +69,24 @@ public class ProjectController {
 
 
     @GetMapping("/progress")
-    public String editProject(@RequestParam("id")Integer id,@RequestParam("item")Integer item,
-                              @RequestParam("quantity")Integer quantity,@RequestParam("amount")Integer amount,
-                              @RequestParam("manager")Integer manager,@RequestParam("progress")Integer progress){
-        service.edit(createProject(id,item,quantity,amount,manager,progress));
+    public String editProject(@ModelAttribute @Validated ProgressDto progressDto,
+                              BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()){
+            return errorProgress(model,progressDto);
+        }
+        service.saveProgress(createProject(progressDto));
         return "redirect:/project/list";
     }
     @PostMapping("/check")
     public String checkProject(Model model,@ModelAttribute @Validated EndCheckDto dto,
                                BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return projectList(model,dto);
+            return errorEnd(model,dto);
         }
         Order o = service.findById(dto.getId());
         o.setDeliveryDate(dto.getDate());
         o.setEndCheck(dto.getEndCheck());
+        o.setProgress(dto.getProgress());
         service.edit(o);
         return "redirect:/project/list";
     }
@@ -99,9 +104,16 @@ public class ProjectController {
         if(bindingResult.hasErrors()){
             return addProject(model,dto);
         }
-        dto.setReceptionDate(nowDate());
         service.save(dto);
         return "redirect:/project/list";
+    }
+    @GetMapping("errorEnd")
+    public String errorEnd(Model model,@ModelAttribute EndCheckDto endCheckDto){
+        return "error";
+    }
+    @GetMapping("errorProgress")
+    public String errorProgress(Model model, @ModelAttribute ProgressDto progressDto){
+        return "errorProgress";
     }
     @RequestMapping(value = "/delete")
     public String deleteProject(@RequestParam("id")Integer id){
@@ -146,14 +158,17 @@ public class ProjectController {
         json.setDeliveryDate(o.getDeliveryDate());
         return json;
     }
-    private Order createProject(Integer id,Integer item,Integer quantity,
-                                 Integer amount,Integer manager,Integer progress){
-        Order o = service.findById(id);
-        o.setItemCategory(item);
-        o.setQuantity(quantity);
-        o.setAmount(amount);
-        o.setManager(manager);
-        o.setProgress(progress);
+
+    /**
+     *ProgerssDtoをOrderに変換するメソッド
+     * */
+    private Order createProject(ProgressDto dto){
+        Order o = service.findById(dto.getId());
+        o.setItemCategory(dto.getItem());
+        o.setQuantity(dto.getQuantity());
+        o.setAmount(dto.getAmount());
+        o.setManager(dto.getManager());
+        o.setProgress(dto.getProgress());
         return o;
     }
 

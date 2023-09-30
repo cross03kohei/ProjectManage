@@ -117,39 +117,66 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/project/progress}">
-                    <div class="client_name">
-                        <p id="name"></p>
-                        <input type="hidden" name="id" id="id">
-                    </div>
-                    <div class="item">
-                        <label>商品名</label>
-                        <select name="item" id="item">
-                            <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" selected></option>
-                        </select>
-                    </div>
-                    <div class="quantity">
-                        <label>数量</label>
-                        <input type="text" name="quantity" id="quantity">
-                    </div>
-                    <div class="amount">
-                        <label>金額</label>
-                        <input type="text" name="amount" id="amount">
-                    </div>
-                    <div class="manager">
-                        <label>担当者</label>
-                        <select name="manager" id="manager">
-                            <option th:each="manager : ${manager}" th:value="${manager.key}"
-                                    th:text="${manager.value}" selected></option>
-                        </select>
-                    </div>
-                    <div class="progress">
-                        <label>状況</label>
-                        <select name="progress" id="progress">
-                            <option th:each="progress : ${progress}" th:value="${progress.key}"
-                                    th:text="${progress.value}" selected></option>
-                        </select>
-                    </div>
+                <form th:action="@{/project/progress}" th:object="${progressDto}">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th class="active">顧客名</th>
+                            <td>
+                                <div class="form-group">
+                                    <p id="name"></p>
+                                    <input type="hidden" id="id" th:field="*{id}">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="active">商品名</th>
+                            <td>
+                                <div class="form-group">
+                                    <select id="item" class="form-select form-select-lg mb-3" aria-label="Default select example" th:field="*{item}">
+                                        <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" selected></option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="active">数量</th>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" id="quantity" class="form-control" th:field="*{quantity}">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                        <th class="active">金額</th>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="amount" class="form-control" th:field="*{amount}">
+                            </div>
+                        </td>
+                        </tr>
+                        <tr>
+                            <th class="active">担当者</th>
+                            <td>
+                                <div class="form-group">
+                                    <select id="manager" class="form-select form-select-lg mb-3" aria-label="Default select example" th:field="*{manager}">
+                                        <option th:each="manager : ${manager}" th:value="${manager.key}"
+                                            th:text="${manager.value}" selected></option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="active">状況</th>
+                            <td>
+                                <div class="form-group">
+                                    <select name="progress" id="progress" class="form-select form-select-lg mb-3" aria-label="Default select example" th:filed="*{progress}">
+                                        <option th:each="progress : ${progress}" th:value="${progress.key}"
+                                                th:text="${progress.value}" selected></option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                     <input type="submit" class="btn btn-primary" value="決定">
@@ -201,11 +228,6 @@
                             </td>
                         </tr>
                     </table>
-                    <ul>
-                        <li th:each="error : ${#fields.detailedErrors()}">
-                            <span th:text="${error.message}">Error message</span>
-                        </li>
-                    </ul>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         <button id="endBtn" type="submit" class="btn btn-primary">決定</button>
