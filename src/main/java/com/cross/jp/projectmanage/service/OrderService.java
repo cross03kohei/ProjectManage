@@ -76,7 +76,8 @@ public class OrderService {
         o.setAmount(dto.getAmount());
         o.setManager(dto.getManager());
         o.setProgress(dto.getProgress());
-        o.setEndCheck(false);
+        o.setPaymentCheck(false);   //入金済みをfalseで登録
+        o.setEndCheck(false);       //納品済みをfalseで登録
         o.setDeliveryDate(dto.getDeliveryDate());
         o.setReceptionDate(dto.getReceptionDate());
         return o;

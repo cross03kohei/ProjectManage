@@ -6,6 +6,7 @@
     <h3>顧客情報登録</h3>
     <div id="client_edit_form">
         <form th:action="@{/client/save}" th:object="${clientDto}" method="post">
+            <input type="hidden" th:field="*{id}">
             <table class="table table-bordered table-hover" style="width: 600px">
                 <tr>
                     <th class="active">顧客名</th>

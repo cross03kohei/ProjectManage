@@ -46,34 +46,32 @@ public class ClientController {
         if(bindingResult.hasErrors()){
             return addClient(model,clientDto);
         }
+        if(clientDto.getId() != null){
+            Integer id = clientDto.getId();
+            service.edit(clientDto);
+            return clientDetail(model,id);
+        }
         service.save(clientDto);
         return "redirect:/client/list";
     }
     @GetMapping("/edit/{id}")
     public String editClient(Model model,@PathVariable("id")Integer id,
-                             @RequestParam("name")String name,@RequestParam("post_code")String postCode,
-                             @RequestParam("address")String address,@RequestParam("phone")String telephoneNumber,
-                             @RequestParam("fax")String fax,@RequestParam("note")String note){
-        service.edit(create(id,name,postCode,address,telephoneNumber,fax,note));
-        return "redirect:/client/{id}";
+                             @ModelAttribute ClientDto dto){
+        Client c = service.getClient(id);
+        dto.setId(c.getId());
+        dto.setName(c.getName());
+        dto.setTelephoneNumber(c.getTelephoneNumber());
+        dto.setFax(c.getFax());
+        dto.setAddress(c.getAddress());
+        dto.setPostCode(c.getPostCode());
+        dto.setNote(c.getNote());
+        return "client_add";
     }
-
 
     @GetMapping("/delete/{id}")
     public String deleteClient(@PathVariable("id")Integer id){
         Client client = service.getClient(id);
         service.delete(client);
         return "redirect:/client/list";
-    }
-    private Client create(Integer id,String name, String postCode, String address,
-                                String telephoneNumber, String fax,String note){
-        Client c = service.getClient(id);
-        c.setName(name);
-        c.setPostCode(postCode);
-        c.setAddress(address);
-        c.setTelephoneNumber(telephoneNumber);
-        c.setFax(fax);
-        c.setNote(note);
-        return c;
     }
 }

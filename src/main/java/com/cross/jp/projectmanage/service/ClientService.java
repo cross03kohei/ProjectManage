@@ -21,11 +21,10 @@ public class ClientService {
     public void save(ClientDto clientDto){
         clientRepository.save(createClient(clientDto));
     }
-    public void edit(Client client){ clientRepository.save(client); }
+    public void edit(ClientDto dto){ clientRepository.save(editClient(dto));}
     public void delete(Client client){ clientRepository.delete(client);}
     private Client createClient(ClientDto c){
         Client client = new Client();
-        client.setId(c.getId());
         client.setName(c.getName());
         client.setPostCode(c.getPostCode());
         client.setAddress(c.getAddress());
@@ -33,5 +32,15 @@ public class ClientService {
         client.setFax(c.getFax());
         client.setNote(c.getNote());
         return client;
+    }
+    private Client editClient(ClientDto dto){
+        Client c = getClient(dto.getId());
+        c.setName(dto.getName());
+        c.setPostCode(dto.getPostCode());
+        c.setAddress(dto.getAddress());
+        c.setTelephoneNumber(dto.getTelephoneNumber());
+        c.setFax(dto.getFax());
+        c.setNote(dto.getNote());
+        return c;
     }
 }
