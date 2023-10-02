@@ -83,8 +83,8 @@
                     <td>
                         <div class="form-group">
                             <select name="progress" th:field="*{progress}" class="form-select form-select-lg mb-3" aria-label="Default select example">
-                                <option th:each="progress : ${progress}" th:value="${progress.key}"
-                                        th:text="${progress.value}" th:selected="${progress.key == 0}"></option>
+                                <option value="0">未着手</option>
+                                <option value="1">進行中</option>
                             </select>
                         </div>
                     </td>

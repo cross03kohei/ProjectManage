@@ -20,7 +20,7 @@
         </form>
     </div>
     <div class="proceeds_table">
-        <form>
+        <form th:action="@{/proceeds/check}" method="post">
         <table class="table table-dark table-striped-columns">
             <thead>
                 <tr>
@@ -33,17 +33,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each=" order : ${order}">
+                <tr th:each=" order, st : ${order}">
                     <td th:text="${order.deliveryDate}"></td>
                     <td th:text="${order.client.name}"></td>
                     <td th:text="${item.get(order.itemCategory)}"></td>
                     <td th:text="${order.amount}"></td>
-                    <td><input type="radio"></td>
+                    <td ><input type="checkbox" th:checked="${order.paymentCheck}" name="id" th:value="${order.id}"></td>
                     <td><a th:href="@{'/proceeds/edit/' + ${order.id}}" class="btn btn-primary">編集</a></td>
                 </tr>
                 <tr>
                     <td><p>合計</p></td><td></td><td></td>
-                    <td><p th:text="${allAmount}"></p></td>
+                    <td><p th:text="${allAmount}"></p></td><td><input type="submit" value="入金済みを更新"> </td><td></td>
                 </tr>
             </tbody>
         </table>

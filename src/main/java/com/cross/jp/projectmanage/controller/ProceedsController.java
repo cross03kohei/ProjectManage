@@ -1,16 +1,20 @@
 package com.cross.jp.projectmanage.controller;
 
 import com.cross.jp.projectmanage.CategoryMap;
+import com.cross.jp.projectmanage.dto.CheckDto;
+import com.cross.jp.projectmanage.dto.CheckListDto;
 import com.cross.jp.projectmanage.entity.Order;
 import com.cross.jp.projectmanage.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,13 +41,17 @@ public class ProceedsController {
     public String searchProceeds(Model model, @RequestParam("date")String date,
                                  @RequestParam("item")Integer item){
         List<Order> orders = service.search(date,item);
-
         model.addAttribute("order",orders);
         model.addAttribute("date",date);
         model.addAttribute("itemCategory",item);
         model.addAttribute("allAmount",allAmount(orders));
         model.addAttribute("item",CategoryMap.items);
         return "proceeds";
+    }
+    @PostMapping("/check")
+    public String checkProceeds(@RequestParam("id")List<Integer> id){
+        List<Integer> x = id;
+        return "redirect:/proceeds/list";
     }
 
     /**
@@ -67,4 +75,5 @@ public class ProceedsController {
         }
         return amount;
     }
+
 }
