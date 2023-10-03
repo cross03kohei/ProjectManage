@@ -38,7 +38,7 @@
                     <td th:text="${order.client.name}"></td>
                     <td th:text="${item.get(order.itemCategory)}"></td>
                     <td th:text="${order.amount}"></td>
-                    <td><input type="radio"></td>
+                    <td><input type="checkbox"></td>
                     <td><a th:href="@{'/proceeds/edit/' + ${order.id}}" class="btn btn-primary">編集</a></td>
                 </tr>
                 <tr>
