@@ -20,7 +20,7 @@
         </form>
     </div>
     <div class="proceeds_table">
-        <form>
+        <form id="check_form">
         <table class="table table-dark table-striped-columns">
             <thead>
                 <tr>
@@ -33,17 +33,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each=" order : ${order}">
+                <tr th:each=" order, st : ${order}">
                     <td th:text="${order.deliveryDate}"></td>
                     <td th:text="${order.client.name}"></td>
                     <td th:text="${item.get(order.itemCategory)}"></td>
                     <td th:text="${order.amount}"></td>
-                    <td><input type="checkbox"></td>
+                    <td ><input type="hidden" name="listId" th:value="${order.id}">
+                       <input type="checkbox" th:checked="${order.paymentCheck}" name="checkId" th:value="${order.id}">
+                        </td>
                     <td><a th:href="@{'/proceeds/edit/' + ${order.id}}" class="btn btn-primary">編集</a></td>
                 </tr>
                 <tr>
                     <td><p>合計</p></td><td></td><td></td>
-                    <td><p th:text="${allAmount}"></p></td>
+                    <td><p th:text="${allAmount}"></p></td><td><input type="button" value="入金済みを更新" id="edit_button"
+                class="btn btn-primary"></td><td></td>
                 </tr>
             </tbody>
         </table>
@@ -55,5 +58,6 @@
         <a style="display: none" id="downloader" href="#"></a>
     </div>
     <script type="text/javascript" th:src="@{/js/proceeds.js}"></script>
+    <script type="text/javascript" th:src="@{/js/proceeds_edit.js}"></script>
 </body>
 </html>
