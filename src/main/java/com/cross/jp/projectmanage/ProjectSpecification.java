@@ -22,4 +22,9 @@ public class ProjectSpecification {
             return criteriaBuilder.equal(root.get("endCheck"), endCheck);
         };
     }
+    public Specification<Order> paymentContains(Boolean payment){
+        return payment == null ? null : (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal(root.get("paymentCheck"),payment);
+        };
+    }
 }

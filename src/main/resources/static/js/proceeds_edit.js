@@ -9,6 +9,6 @@ jQuery(function () {
         })
         .done(function (data) {
             alert(data);
-        })
-    })
+        });
+    });
 })

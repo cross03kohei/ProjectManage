@@ -50,6 +50,15 @@ public class OrderService {
         }
         return orderRepository.findAll(spec.checkContains(true));   //何も選択されていない場合
     }
+
+    /**
+     *未入金かつ納品済みの売上一覧を取得
+     */
+    public List<Order> isPaymentFalse(){
+        ProjectSpecification spec = new ProjectSpecification();
+        return orderRepository.findAll(spec.paymentContains(false).
+                and(spec.checkContains(true)));
+    }
     public void saveProgress(Order o) { orderRepository.save(o);}
     public void save(ProjectDto dto){
         orderRepository.save(createOrder(dto));

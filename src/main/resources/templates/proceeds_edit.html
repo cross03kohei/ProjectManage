@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head(title = '売上編集',scripts = ~{}, links = ~{})">
+</head>
+<body>
+  <h3>売上編集</h3>
+  <form th:action="@{/proceeds/edit}" th:object="${proceedsDto}" method="post">
+
+    <table class="table table-bordered table-hover" style="width: 600px">
+      <tr>
+        <th class="active">商品名</th>
+        <td>
+          <div class="form-group">
+            <select th:field="*{item}" class="form-select form-select-lg mb-3" aria-label="Default select example">
+              <option th:each="item : ${items}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == 0}"></option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th class="active">数量</th>
+        <td>
+          <div class="form-group" th:classappend="${#fields.hasErrors('quantity')} ? 'has-error'">
+            <input type="text" th:field="*{quantity}" class="form-control">
+            <span class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">
+                                quantity error
+                            </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th class="active">金額</th>
+        <td>
+          <div class="form-group" th:classappend="${#fields.hasErrors('amount')} ? 'has-error'">
+            <input type="text" th:field="*{amount}" class="form-control">
+            <span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+                                amount error
+                            </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th class="active">納品日</th>
+        <td>
+          <div class="form-group">
+            <input type="date" th:field="*{deliveryDate}" class="form-control">
+          </div>
+        </td>
+      </tr>
+    </table>
+    <input type="hidden" th:field="*{id}">
+    <button data-bs-toggle="modal" data-bs-target="#proceedsBack" type="button" class="btn btn-primary">
+      プロジェクトに戻す
+    </button>
+    <button class="btn btn-primary" type="submit">登録</button>
+  </form>
+  <div class="modal fade" id="proceedsBack" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>プロジェクトにもどしますか？</h5>
+          <form th:action="@{/proceeds/back}" th:object="${proceedsDto}" method="post">
+            <input th:field="*{id}" type="hidden">
+            <input th:field="*{deliveryDate}" type="hidden">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+              <button type="submit" class="btn btn-primary">戻す</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

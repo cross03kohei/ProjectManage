@@ -10,13 +10,18 @@
     <div class="search">
         <form th:action="@{/proceeds/search}">
             <label>日付</label>
-            <input type="month" name="date" th:value="${date}">
+            <div class="form-group" style="width: 300px">
+                <input type="month" name="date" th:value="${date}" class="form-control">
+            </div>
             <label>商品</label>
-            <select name="item">
-                <option value="10">すべて</option>
-                <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == itemCategory}"></option>
-            </select>
-            <input type="submit" value="選択">
+            <div class="form-group" style="width: 300px">
+                <select name="item" class="form-select form-select-lg mb-3" aria-label="Default select example">
+                    <option value="10">すべて</option>
+                    <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key == itemCategory}"></option>
+                </select>
+                <input type="submit" value="選択" class="btn btn-primary">
+            </div>
+            <a class="btn btn-primary" th:href="@{/proceeds/payment}">未入金の売上を表示</a>
         </form>
     </div>
     <div class="proceeds_table">
