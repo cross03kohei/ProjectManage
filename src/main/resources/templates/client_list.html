@@ -10,21 +10,18 @@
     </form>
 
     <div class="client_table">
-        <table>
+        <table class="table table-bordered table-hover" style="width: 500px">
             <thead>
                 <tr>
-                    <td>顧客名</td>
-                    <td></td>
+                    <th scope="col" class="info">顧客名</th>
+                    <th scope="col" class="into"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="client : ${clientList}">
                     <td th:text="${client.name}"></td>
                     <td>
-                        <form th:action="@{'/client/' + ${client.id}}">
-                            <input type="hidden" th:value="${client.id}">
-                            <input type="submit" value="詳細">
-                        </form>
+                        <a class="btn btn-primary" th:href="@{'/client/' + ${client.id}}">詳細</a>
                     </td>
                 </tr>
             </tbody>
