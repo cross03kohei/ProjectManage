@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head(title = '顧客登録',scripts = ~{}, links = ~{})"></head>
+<body>
+    <div th:replace="header :: header"></div>
+    <h3>顧客情報登録</h3>
+    <div id="client_edit_form">
+        <form th:action="@{/client/save}" th:object="${clientDto}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <table class="table table-bordered table-hover" style="width: 600px">
+                <tr>
+                    <th class="active">顧客名</th>
+                    <td>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+                            <input type="text" th:field="*{name}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                                name error
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">郵便番号(ハイフンなし　数字7桁)</th>
+                    <td>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('postCode')} ? 'has-error'">
+                            <input type="text" th:field="*{postCode}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}">
+                                postCode error
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">住所</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" th:field="*{address}" class="form-control">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">TEL(ハイフンなし　数字9,10桁)</th>
+                    <td>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('telephoneNumber')} ? 'has-error'">
+                            <input type="text" th:field="*{telephoneNumber}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}">
+                                telephoneNumber error
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">FAX(ハイフンなし　数字9,10桁)</th>
+                    <td>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('fax')} ? 'has-error'">
+                            <input type="text" th:field="*{fax}" class="form-control">
+                            <span class="text-danger" th:if="${#fields.hasErrors('fax')}" th:errors="*{fax}">
+                                fax error
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">備考</th>
+                    <td>
+                        <div class="form-group">
+                            <textarea  th:field="*{note}" class="form-control" id="floatingTextarea2" style="height: 100px">
+                            </textarea>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-primary" type="submit">登録</button>
+        </form>
+    </div>
+
+</body>
+</html>
+

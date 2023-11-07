@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head(title = 'バリデーション表示',scripts = ~{}, links = ~{})">
+</head>
+<body>
+<h4>入力規定を違反しました</h4>
+<form th:action="@{/project/progress}" th:object="${progressDto}">
+    <table class="table table-bordered table-hover" style="display: none">
+        <tr>
+            <th class="active">顧客名</th>
+            <td>
+                <div class="form-group">
+                    <p id="name"></p>
+                    <input type="hidden" id="id" th:field="*{id}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="active">商品名</th>
+            <td>
+                <div class="form-group">
+                    <select id="item" class="form-select form-select-lg mb-3" aria-label="Default select example" th:field="*{item}">
+                        <option th:each="item : ${item}" th:value="${item.key}" th:text="${item.value}" selected></option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="active">数量</th>
+            <td>
+                <div class="form-group">
+                    <input type="text" id="quantity" class="form-control" th:field="*{quantity}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="active">金額</th>
+            <td>
+                <div class="form-group">
+                    <input type="text" id="amount" class="form-control" th:field="*{amount}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="active">担当者</th>
+            <td>
+                <div class="form-group">
+                    <select id="manager" class="form-select form-select-lg mb-3" aria-label="Default select example" th:field="*{manager}">
+                        <option th:each="manager : ${manager}" th:value="${manager.key}"
+                                th:text="${manager.value}" selected></option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="active">状況</th>
+            <td>
+                <div class="form-group">
+                    <select name="progress" id="progress" class="form-select form-select-lg mb-3" aria-label="Default select example" th:filed="*{progress}">
+                        <option th:each="progress : ${progress}" th:value="${progress.key}"
+                                th:text="${progress.value}" selected></option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <ul>
+        <li th:each="error : ${#fields.detailedErrors()}" style="display: block">
+            <span th:text="${error.message}">Error message</span>
+        </li>
+    </ul>
+</form>
+<a th:href="@{/project/list}">ホームに戻る</a>
+</body>
+</html>

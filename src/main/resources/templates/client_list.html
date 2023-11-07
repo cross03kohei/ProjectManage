@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head(title = '顧客一覧',scripts = ~{}, links = ~{})"></head>
+<body>
+    <div th:replace="header :: header"></div>
+    <h3>顧客一覧</h3>
+    <form th:action="@{/client/search}">
+        <input type="text" name="name">
+        <input type="submit" value="検索">
+    </form>
+
+    <div class="client_table">
+        <table class="table table-bordered table-hover" style="width: 500px">
+            <thead>
+                <tr>
+                    <th scope="col" class="info">顧客名</th>
+                    <th scope="col" class="into"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="client : ${clientList}">
+                    <td th:text="${client.name}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/client/' + ${client.id}}">詳細</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
