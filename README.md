@@ -4,4 +4,5 @@
 * プロジェクトを納品済みにすると売上管理の方で確認することができます
 * 売上管理では検索機能を実装し、テーブルの内容をCSVで出力することができます
 * プロジェクト登録の際、同時に顧客名のみになりますが顧客登録ができます
-* homeのURLはhttp://localhost:8080/project/listになります・・・
+* homeのURLはhttp://localhost:8080/project/list　になります・・・
+* データベースはMySQL, データベース名はproject_manageになります
